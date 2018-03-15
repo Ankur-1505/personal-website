@@ -1,19 +1,57 @@
+import { ReactiveFormsModule } from '@angular/forms';
+import { environment } from './../environments/environment';
+
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , NO_ERRORS_SCHEMA } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { BlogComponent } from './blog/blog.component';
+import { WriteArticleComponent } from './write-article/write-article.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
+
+var config = {
+  apiKey: "AIzaSyCG-WPcL2b3jPE7CJU8ihCyvkBm8iraC-4",
+  authDomain: "websiteproject-sanketnaik99.firebaseapp.com",
+  databaseURL: "https://websiteproject-sanketnaik99.firebaseio.com",
+  projectId: "websiteproject-sanketnaik99",
+  storageBucket: "websiteproject-sanketnaik99.appspot.com",
+  messagingSenderId: "624648720335"
+};
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    BlogComponent,
+    WriteArticleComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
+    AngularFireModule.initializeApp(config),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+    ReactiveFormsModule
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })

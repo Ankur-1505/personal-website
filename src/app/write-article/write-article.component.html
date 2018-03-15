@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+   
+    
+
+</head>
+
+<body>
+<!--Main Navigation-->
+<header>
+
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar ie-nav" [containerInside]="false">
+      <logo>
+          <a class="logo navbar-brand" href="#">
+              <strong>Website</strong>
+          </a>
+      </logo>
+      <links>
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="home">Home
+                      <span class="sr-only">(current)</span>
+                  </a>
+              </li>
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="about">About</a>
+              </li>
+              <li class="nav-item active waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="blog">Blog</a>
+              </li>
+          </ul>
+          <ul class="navbar-nav nav-flex-icons">
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link">
+                      <i class="fa fa-twitter"></i>
+                  </a>
+              </li>
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link">
+                      <i class="fa fa-instagram"></i>
+                  </a>
+              </li>
+          </ul>
+      </links>
+  </mdb-navbar>
+  <!-- Main -->
+</header>
+
+<main class="body">
+
+    <!--Article Submission-->
+<form [formGroup]="articleForm" (ngSubmit)="onFormSubmit()">
+
+    <div class="text-center title">
+    <h1 class="home-title">New Article.</h1>
+    <h2 class="home-description">Get started on your new masterpiece below</h2>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <input type="text" id="title" class="form-control" mdbActive formControlName="title">
+        <label for="title">Title</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-quote-left prefix grey-text"></i>
+        <input type="text" id="description" maxlength="140" class="form-control" mdbActive formControlName="description">
+        <label for="description">Description (Less than 140 characters)</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-tag prefix grey-text"></i>
+        <input type="text" id="cat" class="form-control" mdbActive formControlName="category">
+        <label for="form34">Category</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <textarea type="text" [froalaEditor]  id="form8" class="md-textarea" style="height: 100px" mdbActive formControlName="body"></textarea>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-black waves-light" mdbRippleRadius>Publish<i class="fa fa-upload ml-1"></i></button>
+    </div>
+
+
+</form>
+<!--Article Submission-->
+
+
+  </main>
+</body>
+</html>

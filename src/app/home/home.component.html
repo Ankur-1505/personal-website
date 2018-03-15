@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+   
+    
+
+</head>
+
+<body>
+
+
+    <!--Main Navigation-->
+    <header>
+
+        <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar ie-nav" [containerInside]="false">
+            <logo>
+                <a class="logo navbar-brand" href="#">
+                    <strong>Website</strong>
+                </a>
+            </logo>
+            <links>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active waves-light" mdbRippleRadius>
+                        <a class="nav-link" href="home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-light" mdbRippleRadius>
+                        <a class="nav-link" href="about">About</a>
+                    </li>
+                    <li class="nav-item waves-light" mdbRippleRadius>
+                        <a class="nav-link" href="blog">Blog</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item waves-light" mdbRippleRadius>
+                        <a class="nav-link">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item waves-light" mdbRippleRadius>
+                        <a class="nav-link">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </links>
+        </mdb-navbar>
+        <!-- Main -->
+
+        <div class="view intro">
+            <div class="full-bg-img">
+                <div class="mask rgba-black-light flex-center">
+                    <div class="container text-center white-text">
+                        <div class="white-text text-center wow animated fadeInUp">
+                            <h1 class="home-title">Welcome.</h1>
+                            <h2 class="home-description">Keep scrolling to explore</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main Layout-->
+    <main class="text-center py-5">
+
+        <div class="container-fluid wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title text-black">Blog.</h1>
+            <h2 class="home-description">Check out some of the latest posts</h2>
+        </div>
+        <div class="space"></div>
+        
+
+        <div class="containter-fluid wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title">Instagram.</h1>
+            <h2 class="home-description">Check out my instagram feed and follow me to get all the latest updates</h2>
+            <div class="inter-space"></div>
+            <iframe src="https://www.powr.io/plugins/social-feed/view?unique_label=8b4e62f6_1520368048&external_type=iframe" width="100%" height="600" frameborder="0"></iframe>    
+        </div>
+            
+    </main>
+    <!--Main Layout-->
+    <script>
+        new WOW().init();
+    </script>
+</body>
+
+</html>

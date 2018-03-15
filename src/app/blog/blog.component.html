@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+   
+    
+
+</head>
+
+<body>
+<!--Main Navigation-->
+<header>
+
+  <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar ie-nav" [containerInside]="false">
+      <logo>
+          <a class="logo navbar-brand" href="#">
+              <strong>Website</strong>
+          </a>
+      </logo>
+      <links>
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="home">Home
+                      <span class="sr-only">(current)</span>
+                  </a>
+              </li>
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="about">About</a>
+              </li>
+              <li class="nav-item active waves-light" mdbRippleRadius>
+                  <a class="nav-link" href="blog">Blog</a>
+              </li>
+          </ul>
+          <ul class="navbar-nav nav-flex-icons">
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link">
+                      <i class="fa fa-twitter"></i>
+                  </a>
+              </li>
+              <li class="nav-item waves-light" mdbRippleRadius>
+                  <a class="nav-link">
+                      <i class="fa fa-instagram"></i>
+                  </a>
+              </li>
+          </ul>
+      </links>
+  </mdb-navbar>
+  <!-- Main -->
+</header>
+
+<main>
+
+    <div class="container blog-page">
+        <!--Grid column-->
+<div class="col-lg-4 col-md-12" >
+
+    <div class="card z-depth-1" *ngFor="let article of articlesObservable | async">
+
+        <!--Card image-->
+        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap">
+    
+        <!--Card content-->
+        <div class="card-body black">
+            <!--Title-->
+            <h4 class="card-title text-center text-white">{{article.title}}</h4>
+            <h5 class="card-title text-center text-white">By {{article.author}}</h5>
+            <!--Text-->
+            <p class="card-text text-white">{{article.description}}</p>
+            <a href="#" class="d-flex flex-row-reverse">
+                <h5 class="waves-effect p-2 text-white" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        </div>
+    
+    </div>
+    </div>
+<!--Grid column-->
+
+
+    </div>
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+</body>

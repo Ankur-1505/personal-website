@@ -1,3 +1,4 @@
+import { UserAccountComponent } from './user-account/user-account.component';
 import { LoginComponent } from './login/login.component';
 import { ReadArticleComponent } from './read-article/read-article.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path : 'login',
     component : LoginComponent
+  },
+  {
+    path: 'user-account',
+    component : UserAccountComponent
   }
 ];
 

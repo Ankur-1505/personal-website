@@ -9,6 +9,7 @@ export class AuthServiceService {
 
   private authState : any;
   user: Observable<firebase.User>;
+  Profile : String;
 
   constructor(public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
@@ -18,11 +19,16 @@ export class AuthServiceService {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Nice, it worked!');
+        console.log(firebase.auth().currentUser);
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
       });
       this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  }
+
+  updateName(authorName : string) {
+
   }
 
   logout() {

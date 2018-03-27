@@ -25,6 +25,7 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ReadArticleComponent } from './read-article/read-article.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserAccountComponent } from './user-account/user-account.component';
 
 
 
@@ -45,7 +46,7 @@ var config = {
     AboutComponent,
     BlogComponent,
     WriteArticleComponent,    
-    ReadArticleComponent, LoginComponent
+    ReadArticleComponent, LoginComponent, UserAccountComponent
   ],
   imports: [
     BrowserModule,

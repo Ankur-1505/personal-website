@@ -1,5 +1,5 @@
 import { AuthServiceService } from './auth-service.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 
 
@@ -10,6 +10,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { WriteArticleComponent } from './write-article/write-article.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ReadArticleComponent } from './read-article/read-article.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -55,7 +57,10 @@ var config = {
     AngularFireAuthModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxEditorModule,
+    FormsModule,
+    HttpClientModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService ],

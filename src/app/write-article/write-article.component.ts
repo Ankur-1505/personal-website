@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-write-article',
@@ -23,9 +24,9 @@ export class WriteArticleComponent implements OnInit {
     'Code'
   ]
 
-  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth) 
+  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService) 
   {
-    if(this.auth.auth.currentUser == null){
+    if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
   }

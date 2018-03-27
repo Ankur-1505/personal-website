@@ -1,6 +1,7 @@
 import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -19,6 +20,9 @@ import { AboutComponent } from './about/about.component';
 import { BlogComponent } from './blog/blog.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ReadArticleComponent } from './read-article/read-article.component';
+import { LoginComponent } from './login/login.component';
+
 
 
 var config = {
@@ -37,7 +41,8 @@ var config = {
     HomeComponent,
     AboutComponent,
     BlogComponent,
-    WriteArticleComponent
+    WriteArticleComponent,    
+    ReadArticleComponent, LoginComponent
   ],
   imports: [
     BrowserModule,

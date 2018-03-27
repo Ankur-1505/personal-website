@@ -7,7 +7,7 @@
 
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 <!--Main Navigation-->
 <header>
 
@@ -47,38 +47,18 @@
   </mdb-navbar>
   <!-- Main -->
 </header>
+<main class="text-center py-5 read-page">
 
-<main>
-
-    <div class="container blog-page">
-
-    <div class="jumbotron black text-white"  *ngFor="let article of articlesObservable | async">
-        <div class="row">
-            <div class="col-md-4">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap">
-            </div>
-            <div class="col-md-8">
-                <h4 class="card-title text-center text-white">{{article.title}}</h4>
-            <h5 class="card-title text-center text-white">By {{article.author}}</h5>
-            <p class="card-text text-white">{{article.description}}</p>
-            <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
-                <h5 class="waves-effect p-2 text-white" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>
-            </a>
-            </div>
-        </div>
-    </div> 
+  <div class="container-fluid wow fadeInUp" data-wow-delay="0.5s">
+      <h1 class="home-title text-black">{{ (article | async)?.title }}</h1>
+      <p class="home-description text-black">{{ (article | async)?.description }}</p>
+      <div class="article-body" [innerHTML]="(article | async)?.body"></div>
+  </div>
 
 
 
-    </div>
+
+
 </main>
-
-
-
-
-
-
-
-
-
 </body>
+</html>

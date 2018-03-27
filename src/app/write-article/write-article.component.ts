@@ -1,3 +1,5 @@
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -12,6 +14,7 @@ export class WriteArticleComponent implements OnInit {
 
   articleForm : FormGroup;
   article : any;
+  articleheading : String;
 
   cat: string[] = [
     'Travel',
@@ -20,10 +23,11 @@ export class WriteArticleComponent implements OnInit {
     'Code'
   ]
 
-  constructor(private db : AngularFireDatabase) 
+  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth) 
   {
-    
-
+    if(this.auth.auth.currentUser == null){
+      this.router.navigate(['/login']);
+    }
   }
  
   publishArticle(value: any){
@@ -42,6 +46,17 @@ export class WriteArticleComponent implements OnInit {
   public onFormSubmit(){
     this.article = this.articleForm.value;
     this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
+    this.articleheading = this.article.title.replace(/\s/g,'-');
+    console.log(this.articleheading);
+    this.db.database.ref('/articles/' + this.articleheading).set({
+      title: this.article.title,
+      description : this.article.description,
+      body : this.article.body,
+      category : this.article.category,
+      createdAt : this.article.createdAt,
+      id: this.articleheading
+    });
+
     console.log(this.article);
   }
 

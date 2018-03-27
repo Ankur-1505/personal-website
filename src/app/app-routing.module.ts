@@ -1,3 +1,5 @@
+import { LoginComponent } from './login/login.component';
+import { ReadArticleComponent } from './read-article/read-article.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
 import { BlogComponent } from './blog/blog.component';
 import { AboutComponent } from './about/about.component';
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'write-article',
     component: WriteArticleComponent
+  },
+  {
+    path: 'read-article/:id',
+    component: ReadArticleComponent
+  },
+  {
+    path : 'login',
+    component : LoginComponent
   }
 ];
 

@@ -1,8 +1,12 @@
+import { AuthServiceService } from './../auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { AngularFireModule } from 'angularfire2';
+import * as firebase from 'firebase';
+
 
 
 @Component({
@@ -14,8 +18,9 @@ export class LoginComponent implements OnInit {
   
   loginForm : FormGroup;
   user : any;
+  public authState : any
 
-  constructor(private router: Router, private auth : AngularFireAuth, private location: Location) { }
+  constructor(private router: Router, private auth : AngularFireAuth, private location: Location, public authService : AuthServiceService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -26,14 +31,8 @@ export class LoginComponent implements OnInit {
 
   onFormSubmit(){
     this.user = this.loginForm.value;
-    this.auth.auth.signInWithEmailAndPassword(this.user.email,this.user.password).then(success => {
-      console.log(success, 'success');
-      console.log(this.auth.auth.currentUser.email);
-      this.location.back();
-    }
-    ).catch(err => {
-      console.log('error');
-    })
+    this.authService.login(this.user.email,this.user.password);
+    this.router.navigate(['/home']);
   }
 
 }

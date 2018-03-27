@@ -1,4 +1,7 @@
+import { AuthServiceService } from './auth-service.service';
 import { Component } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,4 +11,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService) 
+  {
+    
+  }
 }

@@ -1,3 +1,4 @@
+import { AuthServiceService } from './auth-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
 
@@ -57,7 +58,7 @@ var config = {
     ReactiveFormsModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [],
+  providers: [ AuthServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

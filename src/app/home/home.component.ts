@@ -1,5 +1,6 @@
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from '../auth-service.service';
 
 
 @Component({
@@ -9,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth : AngularFireAuth) { }
+  constructor(private auth : AngularFireAuth, public authService : AuthServiceService) { }
 
   ngOnInit() {
   }
-
+  logout() {
+    this.authService.logout();
+  }
 }

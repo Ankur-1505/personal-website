@@ -12,10 +12,25 @@
         </div>
 
         <div class="jumbotron">
-          <div class="row">
-              <div class="md-form form-sm">
-            <input type="text" id="form11" disabled>
-            <label for="form11" class="disabled">{{email}}</label>
+          <div class="row form-row">
+            <div class="col-md-3">
+              <h2 class="form-title">Your Email : </h2>
+            </div>
+            <div class="col-md-9"><div class="md-form form-sm input-content">
+                <input type="text" id="form11" disabled>
+                <label for="form11" class="disabled">{{email}}</label>
+                </div></div>
+          </div>
+          <div class="row form-row">
+            <div class="col-md-3">
+              <h2 class="form-title">Your Name : </h2>
+            </div>
+            <div class="col-md-7">
+              <input type="text" id="form11" placeholder="{{authorName}}" [(ngModel)]="name">
+              <label for="form11" class="disabled"></label>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-primary waves-light" mdbRippleRadius (click)="updateName(name)"><i class="fa fa-upload"></i>   Update</button>
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ export class AuthServiceService {
   }
 
   updateName(authorName : string) {
-
+    
   }
 
   logout() {

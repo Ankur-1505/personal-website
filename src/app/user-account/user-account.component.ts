@@ -15,7 +15,6 @@ export class UserAccountComponent implements OnInit {
 
   email : string;
   user : any;
-  usr : any;
   name : string;
   authorName : string;
 

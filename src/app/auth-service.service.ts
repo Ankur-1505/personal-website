@@ -9,7 +9,6 @@ export class AuthServiceService {
 
   private authState : any;
   user: Observable<firebase.User>;
-  Profile : String;
 
   constructor(public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
@@ -27,9 +26,6 @@ export class AuthServiceService {
       this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
   }
 
-  updateName(authorName : string) {
-    
-  }
 
   logout() {
     this.afAuth.auth.signOut();

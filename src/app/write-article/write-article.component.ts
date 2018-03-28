@@ -16,6 +16,8 @@ export class WriteArticleComponent implements OnInit {
   articleForm : FormGroup;
   article : any;
   articleheading : String;
+  user : any;
+  authorName : string;
 
   cat: string[] = [
     'Travel',
@@ -42,6 +44,11 @@ export class WriteArticleComponent implements OnInit {
       category: new FormControl(),
       body: new FormControl()
     });
+    this.auth.authState.subscribe(auth => {
+      this.user = auth;
+      console.log("success");
+    });
+    
   }
 
   public onFormSubmit(){
@@ -55,6 +62,8 @@ export class WriteArticleComponent implements OnInit {
       body : this.article.body,
       category : this.article.category,
       createdAt : this.article.createdAt,
+      authorName : this.auth.auth.currentUser.displayName,
+      authorUID : this.auth.auth.currentUser.uid,
       id: this.articleheading
     });
 

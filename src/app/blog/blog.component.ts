@@ -12,19 +12,24 @@ import { Observable } from 'rxjs/Observable';
 export class BlogComponent implements OnInit {
 
   id: any;
-
+  articles : any;
 
   articlesObservable : Observable<any>;
   constructor(private db : AngularFireDatabase) {
+
   }
 
   ngOnInit() {
+    this.articles = this.db.list('/articles', ref => ref.orderByChild('createdAt'));
     this.articlesObservable = this.getArticles('/articles');
     console.log("works");
     console.log(this.articlesObservable);
   }
   getArticles(listPath) : Observable<any> {
-    return this.db.list(listPath).valueChanges();
-  }
+    
+    return this.db.list('/articles').valueChanges().map(articles => {
+      return articles.reverse();
+    })
 
+  }
 }

@@ -24,7 +24,7 @@
             </div>
             <div class="col-md-8">
                 <h4 class="card-title text-center text-white">{{article.title}}</h4>
-            <h5 class="card-title text-center text-white">By {{article.author}}</h5>
+            <h5 class="card-title text-center text-white">By {{article.authorName}}</h5>
             <p class="card-text text-white">{{article.description}}</p>
             <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
                 <h5 class="waves-effect p-2 text-white" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>

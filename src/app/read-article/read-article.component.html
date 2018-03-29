@@ -14,10 +14,15 @@
 </header>
 <main class="text-center py-5 read-page">
 
-  <div class="container-fluid wow fadeInUp" data-wow-delay="0.5s">
-      <h1 class="home-title text-black">{{ (article | async)?.title }}</h1>
-      <p class="home-description text-black">{{ (article | async)?.description }}</p>
-      <div class="article-body" [innerHTML]="(article | async)?.body"></div>
+  <div class="container-fluid">
+      <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
+            <h1 class="home-title text-black">{{ (article | async)?.title }}</h1>
+            <p class="home-description">By {{ (article | async)?.authorName }}</p>
+      </div>
+      <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
+      <p class="article-body text-black">{{ (article | async)?.description }}</p>
+      <div class="article-body body" [innerHTML]="(article | async)?.body"></div>
+    </div>
   </div>
 
 

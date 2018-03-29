@@ -27,7 +27,7 @@ export class BlogComponent implements OnInit {
   }
   getArticles(listPath) : Observable<any> {
     
-    return this.db.list('/articles').valueChanges().map(articles => {
+    return this.db.list('/articles', ref => ref.orderByChild('createdAt')).valueChanges().map(articles => {
       return articles.reverse();
     })
 

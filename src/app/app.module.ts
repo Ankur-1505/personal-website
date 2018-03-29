@@ -10,6 +10,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgxEditorModule } from 'ngx-editor';
 
 
@@ -61,7 +62,8 @@ var config = {
     ReactiveFormsModule,
     NgxEditorModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireStorageModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService ],

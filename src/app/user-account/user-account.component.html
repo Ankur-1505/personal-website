@@ -33,6 +33,19 @@
               <button class="btn btn-primary waves-light" mdbRippleRadius (click)="updateName(name)"><i class="fa fa-upload"></i>   Update</button>
             </div>
           </div>
+            <div class="row">
+              <div class="col-md-3">
+                <h2 class="form-title">Your Photo : </h2>
+              </div>
+              <div class="col-md-3">
+                <img src="{{display | async}}" alt="avatar" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
+                <img src="{{imgsrc |async}}" alt="" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
+              </div>
+              <div class="col-md-5">
+                <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
+                <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg" />
+              </div>                
+            </div>
         </div>
 
     

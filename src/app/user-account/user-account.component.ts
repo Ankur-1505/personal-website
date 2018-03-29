@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 
 
@@ -17,8 +18,13 @@ export class UserAccountComponent implements OnInit {
   user : any;
   name : string;
   authorName : string;
-
-  constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService) {
+  displayImage : File;
+  uid : any;
+  file : File;
+  selectedFiles : FileList;
+  imgsrc; 
+  display: any;
+  constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
@@ -26,7 +32,10 @@ export class UserAccountComponent implements OnInit {
       this.user = auth;
       this.email = this.user.email;
       this.authorName = this.user.displayName;
+      this.uid = this.user.uid,
+      this.display = this.user.photoURL
     })
+    console.log(this.imgsrc);
    }
 
   ngOnInit() {
@@ -36,8 +45,8 @@ export class UserAccountComponent implements OnInit {
     this.authorName = name;
     console.log(this.auth.auth.currentUser);
     this.auth.auth.currentUser.updateProfile({
-      displayName : name,
-      photoURL : ""
+      displayName : this.authorName,
+      photoURL : this.imgsrc
     }).then(function(){
       console.log("success");
     }); 
@@ -45,4 +54,27 @@ export class UserAccountComponent implements OnInit {
     console.log(this.auth.auth.currentUser.displayName);   
   }
 
+  selectImage(event) {
+    this.selectedFiles = event.target.files;
+    if(this.selectedFiles.item(0)){
+      let file = this.selectedFiles.item(0);
+    const uploadTask = this.afStorage.upload('/users/' + this.uid + '/' + 'display',file);
+    this.imgsrc = uploadTask.downloadURL();
+    console.log(this.imgsrc.value);
+    this.uploadImage(this.imgsrc);
+    
+  }
 }
+  uploadImage(imgsource) {
+    console.log(this.auth.auth.currentUser);
+    console.log(imgsource.value);
+    this.auth.auth.currentUser.updateProfile({
+      displayName : this.authorName,
+      photoURL: "https://firebasestorage.googleapis.com/v0/b/websiteproject-sanketnaik99.appspot.com/o/users%2FuWgdnPlr0CZe0IdyPzwOuNwybnz2%2Fdisplay?alt=media&token=277870c8-cdd4-4001-9e59-4386c9cdd1b6"
+    }).then(function(){
+      console.log("image Uploaded");
+    });
+    console.log(this.auth.auth.currentUser);
+    }
+  }
+  

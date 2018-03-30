@@ -16,12 +16,19 @@
 
   <div class="container-fluid">
       <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
-            <h1 class="home-title text-black">{{ (article | async)?.title }}</h1>
-            <p class="home-description">By {{ (article | async)?.authorName }}</p>
+        <div class="row">
+            <div class="col-md-4">
+            <img class="img-fluid z-depth-1" src="{{(article | async)?.articleImage}}" alt="">
+          </div>
+          <div class="col-md-8 vertical-center">
+            <h1 class="home-title text-black h1-responsive">{{ (article | async)?.title }}</h1>
+            <p class="home-description h2-responsive">By {{ (article | async)?.authorName }}</p>
+          </div>
+        </div>
       </div>
       <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
-      <p class="article-body text-black">{{ (article | async)?.description }}</p>
-      <div class="article-body body" [innerHTML]="(article | async)?.body"></div>
+      <p class="article-body text-black h3-responsive">{{ (article | async)?.description }}</p>
+      <div class="article-body body h3-responsive" [innerHTML]="(article | async)?.body"></div>
     </div>
   </div>
 

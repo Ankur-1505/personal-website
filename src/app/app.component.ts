@@ -13,12 +13,14 @@ export class AppComponent {
   title = 'app';
   name : string = "";
   user : any;
+  image : string;
   constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService) 
   { 
     if(authService.user){
       this.user = this.auth.authState.subscribe(auth => {
         this.user = auth;
         this.name = this.user.displayName;
+        this.image = this.user.photoURL;
       })
     }
     

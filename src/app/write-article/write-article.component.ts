@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,8 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AuthServiceService } from '../auth-service.service';
+import { AngularFireStorage } from 'angularfire2/storage';
+
 
 @Component({
   selector: 'app-write-article',
@@ -18,6 +21,10 @@ export class WriteArticleComponent implements OnInit {
   articleheading : String;
   user : any;
   authorName : string;
+  file : File;
+  selectedFiles : FileList;
+  imgsrc : Observable<string>;
+  imghttp : string; 
 
   cat: string[] = [
     'Travel',
@@ -26,7 +33,7 @@ export class WriteArticleComponent implements OnInit {
     'Code'
   ]
 
-  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService) 
+  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
@@ -64,10 +71,27 @@ export class WriteArticleComponent implements OnInit {
       createdAt : this.article.createdAt,
       authorName : this.auth.auth.currentUser.displayName,
       authorUID : this.auth.auth.currentUser.uid,
-      id: this.articleheading
+      id: this.articleheading,
+      articleImage : this.imghttp
     });
 
     console.log(this.article);
   }
+
+  selectImage(event) {
+    this.selectedFiles = event.target.files;
+    let uid = this.auth.auth.currentUser.uid;
+    if(this.selectedFiles.item(0)){
+      let file = this.selectedFiles.item(0);
+    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleheading + '/' + 'article-image' ,file);
+    this.imgsrc = uploadTask.downloadURL();
+    console.log(this.imgsrc);
+    const uploadFirebase = this.imgsrc.subscribe(src => {
+      this.imghttp = src;
+    })
+    
+  }
+}
+ 
 
 }

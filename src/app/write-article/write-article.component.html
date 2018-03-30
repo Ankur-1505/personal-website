@@ -46,6 +46,19 @@
         <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="body" minHeight="400px"></app-ngx-editor>
     </div>
 
+    <div class="row upload-image">
+            <div class="col-md-3">
+              <h2 class="form-title">Add Photo : </h2>
+            </div>
+            <div class="col-md-3">
+              <img src="{{imghttp }}" alt="" class="img-fluid z-depth-1" height="20px" width="20px" *ngIf="this.imghttp">
+            </div>
+            <div class="col-md-5">
+              <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
+              <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg" />
+            </div>                
+          </div> 
+
     <div class="text-center">
         <button class="btn btn-black waves-light" mdbRippleRadius>Publish<i class="fa fa-upload ml-1"></i></button>
     </div>

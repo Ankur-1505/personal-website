@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs/Rx';
 import { AuthServiceService } from './../auth-service.service';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AngularFireStorage } from 'angularfire2/storage';
+
 
 
 
@@ -22,7 +24,8 @@ export class UserAccountComponent implements OnInit {
   uid : any;
   file : File;
   selectedFiles : FileList;
-  imgsrc; 
+  imgsrc : Observable<string>;
+  imghttp : string; 
   display: any;
   constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) {
     if(!(this.authService.user)){
@@ -33,9 +36,8 @@ export class UserAccountComponent implements OnInit {
       this.email = this.user.email;
       this.authorName = this.user.displayName;
       this.uid = this.user.uid,
-      this.display = this.user.photoURL
+      this.imghttp = this.user.photoURL
     })
-    console.log(this.imgsrc);
    }
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class UserAccountComponent implements OnInit {
     console.log(this.auth.auth.currentUser);
     this.auth.auth.currentUser.updateProfile({
       displayName : this.authorName,
-      photoURL : this.imgsrc
+      photoURL : this.imghttp
     }).then(function(){
       console.log("success");
     }); 
@@ -60,17 +62,20 @@ export class UserAccountComponent implements OnInit {
       let file = this.selectedFiles.item(0);
     const uploadTask = this.afStorage.upload('/users/' + this.uid + '/' + 'display',file);
     this.imgsrc = uploadTask.downloadURL();
-    console.log(this.imgsrc.value);
-    this.uploadImage(this.imgsrc);
+    console.log(this.imgsrc);
+    const uploadFirebase = this.imgsrc.subscribe(src => {
+      this.uploadImage(src);
+    })
     
   }
 }
   uploadImage(imgsource) {
+    this.imghttp = imgsource;
     console.log(this.auth.auth.currentUser);
     console.log(imgsource.value);
     this.auth.auth.currentUser.updateProfile({
       displayName : this.authorName,
-      photoURL: "https://firebasestorage.googleapis.com/v0/b/websiteproject-sanketnaik99.appspot.com/o/users%2FuWgdnPlr0CZe0IdyPzwOuNwybnz2%2Fdisplay?alt=media&token=277870c8-cdd4-4001-9e59-4386c9cdd1b6"
+      photoURL: this.imghttp
     }).then(function(){
       console.log("image Uploaded");
     });

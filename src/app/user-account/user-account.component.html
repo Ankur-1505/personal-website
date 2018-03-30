@@ -38,14 +38,14 @@
                 <h2 class="form-title">Your Photo : </h2>
               </div>
               <div class="col-md-3">
-                <img src="{{display | async}}" alt="avatar" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
-                <img src="{{imgsrc |async}}" alt="" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
+                <img src="{{display}}" alt="avatar" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
+                <img src="{{imghttp }}" alt="" class="img-fluid rounded-circle z-depth-1" height="20px" width="20px">
               </div>
               <div class="col-md-5">
                 <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
                 <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg" />
               </div>                
-            </div>
+            </div> 
         </div>
 
     

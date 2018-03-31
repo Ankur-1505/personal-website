@@ -14,6 +14,7 @@ export class ReadArticleComponent implements OnInit {
   private sub : Subscription;
   article : Observable<any>;
   id : any;
+  category : string;
 
   constructor(private db : AngularFireDatabase, private route: ActivatedRoute) { 
     
@@ -28,8 +29,9 @@ export class ReadArticleComponent implements OnInit {
    console.log('path : ' + path);
    this.article = this.db.object(path).valueChanges();
    console.log(this.article);
-   
    }
+   
+   
 
    ngOnDestroy() {
     this.sub.unsubscribe();

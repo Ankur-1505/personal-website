@@ -27,10 +27,11 @@ export class WriteArticleComponent implements OnInit {
   imghttp : string; 
 
   cat: string[] = [
-    'Travel',
+    'Technology',
     'Lifestyle',
-    'Tech',
-    'Code'
+    'Travel',
+    'Code',
+    'Miscellaneous'
   ]
 
   constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
@@ -61,7 +62,7 @@ export class WriteArticleComponent implements OnInit {
   public onFormSubmit(){
     this.article = this.articleForm.value;
     this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
-    this.articleheading = this.article.title.replace(/\s/g,'-');
+    this.articleheading = this.article.title.replace(/[\s,.#$\[\[]/g,'-');
     console.log(this.articleheading);
     this.db.database.ref('/articles/' + this.articleheading).set({
       title: this.article.title,
@@ -75,8 +76,10 @@ export class WriteArticleComponent implements OnInit {
       articleImage : this.imghttp
     });
 
-    console.log(this.article);
-  }
+    this.router.navigate(['/blog']);
+  } 
+
+  
 
   selectImage(event) {
     this.selectedFiles = event.target.files;

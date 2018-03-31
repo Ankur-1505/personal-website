@@ -37,8 +37,12 @@
 
     <div class="md-form">
         <i class="fa fa-tag prefix grey-text"></i>
-        <input type="text" id="cat" class="form-control" mdbActive formControlName="category">
-        <label for="form34">Category</label>
+        <label>Category</label>
+        <select name="select-cat" id="styledSelect1"  class="browser-default custom-select" formControlName="category"> 
+            <option value="" selected disabled >Select a Category</option>
+            <option *ngFor="let cats of cat" value="{{cats}}">{{cats}}</option>
+        </select>
+    
     </div>
 
     <div class="md-form">
@@ -55,7 +59,7 @@
             </div>
             <div class="col-md-5">
               <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
-              <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg" />
+              <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg,.jpeg" />
             </div>                
           </div> 
 

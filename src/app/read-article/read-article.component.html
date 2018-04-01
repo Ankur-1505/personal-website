@@ -23,12 +23,16 @@
           <div class="col-md-8 vertical-center">
             <h1 class="home-title text-black h1-responsive">{{ (article | async)?.title }}</h1>
             <p class="home-description h2-responsive">By {{ (article | async)?.authorName }}</p>
+            <div class="edit-menu align bottom" *ngIf="((this.authorid) == (article | async)?.authorUID)">
+              <button class="btn btn-primary waves-light" [routerLink]="['/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
+              <button class="btn btn-danger waves-light" (click)="deleteArticle()" mdbRippleRadius><i class="fa fa-times mr-1"></i> Delete</button>
+            </div>
           </div>
         </div>
       </div>
       <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
       <p class="article-body text-black h3-responsive">{{ (article | async)?.description }}</p>
-      <div class="article-body body h3-responsive" [innerHTML]="(article | async)?.body"></div>
+      <div class="article-body h3-responsive" [innerHTML]="(article | async)?.body"></div>
     </div>
   </div>
 

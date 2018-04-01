@@ -7,6 +7,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AuthServiceService } from '../auth-service.service';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class WriteArticleComponent implements OnInit {
     'Miscellaneous'
   ]
 
-  constructor(private db : AngularFireDatabase,private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
+  constructor(private db : AngularFireDatabase,private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
@@ -56,7 +57,14 @@ export class WriteArticleComponent implements OnInit {
       this.user = auth;
       console.log("success");
     });
-    
+    this.route.queryParams.subscribe((params)=> {
+      //check lead Id here
+      if(params['id']){
+        console.log(params['id']);
+      } else {
+        console.log('id not found in params')
+      }
+    });
   }
 
   public onFormSubmit(){

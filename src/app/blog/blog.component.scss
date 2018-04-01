@@ -9,7 +9,8 @@
 }
 // TECHNOLOGY
 .tech {
-    background: #03a9f4;
+    background: rgb(38,50,56);
+    background: linear-gradient(45deg, rgba(38,50,56,1) 0%, rgb(136, 164, 179) 100%);
     color: white
 }
 .tech a {
@@ -19,27 +20,30 @@
 
 // CODE
 .code {
-    background: #000000;
+    background: rgb(0,0,0);
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgb(114, 114, 114) 100%);
     color: white
 }
 .code a {
     text-decoration: none;
     color: white;
-}
+}   
 
 // TRAVEL
 .travel {
-    background: #ff4444;
-    color: white
+    background: rgb(0,176,255);
+    background: linear-gradient(45deg, rgba(0,176,255,1) 0%, rgba(128,222,234,1) 100%);
+    color: black
 }
 .travel a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 // LIFESTYLE
 .lifestyle {
-    background: #00C851;
+    background: rgb(211,47,47);
+    background: linear-gradient(45deg, rgba(211,47,47,1) 0%, rgba(255,171,145,1) 100%);
     color: white
 }
 .lifestyle a {
@@ -49,10 +53,13 @@
 
 // MISCELLANEOUS
 .misc {
-    background: #37474F;
-    color: white
+    background: rgb(0,150,136);
+    background: linear-gradient(45deg, rgba(0,150,136,1) 0%, rgba(178,223,219,1) 100%);
+    color: black
 }
 .misc a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
+
+

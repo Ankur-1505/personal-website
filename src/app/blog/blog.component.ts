@@ -13,17 +13,22 @@ export class BlogComponent implements OnInit {
 
   id: any;
   articles : any;
-
+  showSpinner : boolean =  true;
   articlesObservable : Observable<any>;
   constructor(private db : AngularFireDatabase) {
 
   }
 
   ngOnInit() {
+    console.log('true');
     this.articles = this.db.list('/articles', ref => ref.orderByChild('createdAt'));
     this.articlesObservable = this.getArticles('/articles');
     console.log("works");
     console.log(this.articlesObservable);
+    this.articlesObservable.subscribe(() => {
+      this.showSpinner = false;
+      console.log('false')
+    })
   }
   getArticles(listPath) : Observable<any> {
     

@@ -30,6 +30,10 @@ const routes: Routes = [
     component: WriteArticleComponent
   },
   {
+    path : 'write-article/:id',
+    component: WriteArticleComponent
+  },
+  {
     path: 'read-article/:id',
     component: ReadArticleComponent
   },

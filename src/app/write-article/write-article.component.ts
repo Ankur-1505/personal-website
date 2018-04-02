@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Observable } from 'rxjs/Rx';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
@@ -19,6 +20,7 @@ export class WriteArticleComponent implements OnInit {
 
   articleForm : FormGroup;
   article : any;
+  articleObservable : Observable<any>;
   articleheading : String;
   user : any;
   authorName : string;
@@ -26,6 +28,8 @@ export class WriteArticleComponent implements OnInit {
   selectedFiles : FileList;
   imgsrc : Observable<string>;
   imghttp : string; 
+  articleUpdate : boolean = false;
+  articleContent = '';
 
   cat: string[] = [
     'Technology',
@@ -57,10 +61,13 @@ export class WriteArticleComponent implements OnInit {
       this.user = auth;
       console.log("success");
     });
-    this.route.queryParams.subscribe((params)=> {
+    this.route.params.subscribe((params)=> {
       //check lead Id here
       if(params['id']){
         console.log(params['id']);
+        let id : string = params['id'];
+        this.Article(id);
+        this.articleUpdate = true;
       } else {
         console.log('id not found in params')
       }
@@ -103,6 +110,37 @@ export class WriteArticleComponent implements OnInit {
     
   }
 }
- 
+
+  Article(id : string){
+    this.articleObservable = this.db.object('/articles/' + id).valueChanges();
+    console.log(this.articleObservable);
+    this.articleObservable.subscribe(ref=> {
+      this.articleContent = ref.body;
+      this.imghttp = ref.articleImage;
+    }) 
+  } 
+
+  updateArticle() {
+    this.article = this.articleForm.value;
+    this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
+    this.route.params.subscribe((params)=> {
+      this.articleheading = params['id'];
+    });
+    console.log(this.articleheading);
+    this.db.database.ref('/articles/' + this.articleheading).set({
+      title: this.article.title,
+      description : this.article.description,
+      body : this.article.body,
+      category : this.article.category,
+      createdAt : this.article.createdAt,
+      authorName : this.auth.auth.currentUser.displayName,
+      authorUID : this.auth.auth.currentUser.uid,
+      id: this.articleheading,
+      articleImage : this.imghttp
+    });
+
+    this.router.navigate(['/blog']);
+    
+  }
 
 }

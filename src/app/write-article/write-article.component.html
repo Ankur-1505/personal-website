@@ -15,9 +15,13 @@
 
 <main class="body">
 
-        <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s">
+        <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s" *ngIf="!(this.articleUpdate)">
                 <h1 class="home-title">New Article.</h1>
                 <h2 class="home-description">Get started on your new masterpiece below</h2>
+            </div>
+            <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s" *ngIf="(this.articleUpdate)">
+                <h1 class="home-title">Edit your Article.</h1>
+                <h2 class="home-description">It's okay! Humans can sometimes make mistakes</h2>
             </div>
 
     <!--Article Submission-->
@@ -25,20 +29,20 @@
 
     <div class="md-form">
         <i class="fa fa-pencil prefix grey-text"></i>
-        <input type="text" id="title" class="form-control" mdbActive formControlName="title">
+        <input type="text" id="title" class="form-control" value="{{(articleObservable|async)?.title}}" mdbActive formControlName="title">
         <label for="title">Title</label>
     </div>
 
     <div class="md-form">
         <i class="fa fa-quote-left prefix grey-text"></i>
-        <input type="text" id="description" class="form-control" mdbActive formControlName="description">
+        <input type="text" id="description" class="form-control" value="{{(articleObservable|async)?.description}}" mdbActive formControlName="description">
         <label for="description">Description (Keep it short)</label>
     </div>
 
     <div class="md-form">
         <i class="fa fa-tag prefix grey-text"></i>
         <label>Category</label>
-        <select name="select-cat" id="styledSelect1"  class="browser-default custom-select" formControlName="category"> 
+        <select name="select-cat" id="styledSelect1" value="{{(articleObservable|async)?.category}}" class="browser-default custom-select" formControlName="category"> 
             <option value="" selected disabled >Select a Category</option>
             <option *ngFor="let cats of cat" value="{{cats}}">{{cats}}</option>
         </select>
@@ -47,7 +51,7 @@
 
     <div class="md-form">
         <i class="fa fa-pencil prefix grey-text"></i>
-        <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" formControlName="body" minHeight="400px"></app-ngx-editor>
+        <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="articleContent"  [spellcheck]="true" formControlName="body" imageEndPoint="https://websiteproject-sanketnaik99.firebaseio.com/" minHeight="400px">Hello</app-ngx-editor>
     </div>
 
     <div class="row upload-image">
@@ -55,7 +59,7 @@
               <h2 class="form-title">Add Photo : </h2>
             </div>
             <div class="col-md-3">
-              <img src="{{imghttp }}" alt="" class="img-fluid z-depth-1" *ngIf="this.imghttp">
+              <img src="{{imghttp}}" alt="" class="img-fluid z-depth-1" *ngIf="this.imghttp">
             </div>
             <div class="col-md-5">
               <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
@@ -65,11 +69,13 @@
 
     <div class="text-center">
         <button class="btn btn-black waves-light" mdbRippleRadius>Publish<i class="fa fa-upload ml-1"></i></button>
+        
     </div>
 
 
 </form>
 <!--Article Submission-->
+<button class="btn btn-black waves-light" (click)="updateArticle()" mdbRippleRadius *ngIf="(this.articleUpdate)">Update<i class="fa fa-upload ml-1"></i></button>
 
 
   </main>

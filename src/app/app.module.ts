@@ -30,7 +30,6 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 
 
-
 var config = {
   apiKey: "AIzaSyCG-WPcL2b3jPE7CJU8ihCyvkBm8iraC-4",
   authDomain: "websiteproject-sanketnaik99.firebaseapp.com",
@@ -58,8 +57,6 @@ var config = {
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     ReactiveFormsModule,
     NgxEditorModule,
     FormsModule,

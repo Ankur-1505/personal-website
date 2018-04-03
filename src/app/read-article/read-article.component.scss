@@ -1,17 +1,37 @@
 .read-page {
     margin-top: 30px;
 }
-.home-title{
-    font-family: 'Rubik', sans-serif;
+.read-title{
+    
     margin-top: 40px;
 }
-.home-description {
+.read-author {
     margin-top: 30px;
-    font-family: 'Raleway', sans-serif;
+    
 }
 .space {
     margin-bottom: 12rem;
 }
-.article-body {
-    font-family: 'Raleway', sans-serif;
+.top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.button-night {
+    background : #ffbb33;
+}
+.button-default {
+    background: black;
+}
+.default {
+    background: white;
+    color: black;
+}
+.night {
+    background: black;
+    color: white;
+}
+.night .jumbotron{
+    background: black;
 }

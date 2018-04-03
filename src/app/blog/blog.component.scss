@@ -9,9 +9,9 @@
 }
 // TECHNOLOGY
 .tech {
-    background: rgb(38,50,56);
-    background: linear-gradient(45deg, rgba(38,50,56,1) 0%, rgb(136, 164, 179) 100%);
-    color: white
+    background: rgb(0,176,255);
+    background: linear-gradient(45deg, rgba(0,176,255,1) 0%, rgba(126,87,194,1) 100%);
+    color: white;
 }
 .tech a {
     text-decoration: none;
@@ -20,9 +20,9 @@
 
 // CODE
 .code {
-    background: rgb(0,0,0);
-    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgb(114, 114, 114) 100%);
-    color: white
+    background: rgb(255,179,0);
+    background: linear-gradient(45deg, rgba(255,179,0,1) 0%, rgba(255,109,0,1) 82%);
+    color: white;
 }
 .code a {
     text-decoration: none;
@@ -31,19 +31,19 @@
 
 // TRAVEL
 .travel {
-    background: rgb(0,176,255);
-    background: linear-gradient(45deg, rgba(0,176,255,1) 0%, rgba(128,222,234,1) 100%);
-    color: black
+    background: rgb(41,182,246);
+    background: linear-gradient(45deg, rgba(41,182,246,1) 0%, rgba(38,166,154,1) 82%);
+    color: white
 }
 .travel a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 // LIFESTYLE
 .lifestyle {
-    background: rgb(211,47,47);
-    background: linear-gradient(45deg, rgba(211,47,47,1) 0%, rgba(255,171,145,1) 100%);
+    background: rgb(229,57,53);
+    background: linear-gradient(45deg, rgba(229,57,53,1) 0%, rgba(236,64,122,1) 100%);
     color: white
 }
 .lifestyle a {
@@ -53,13 +53,13 @@
 
 // MISCELLANEOUS
 .misc {
-    background: rgb(0,150,136);
-    background: linear-gradient(45deg, rgba(0,150,136,1) 0%, rgba(178,223,219,1) 100%);
-    color: black
+    background: rgb(105,240,174);
+    background: linear-gradient(45deg, rgba(105,240,174,1) 0%, rgba(0,137,123,1) 100%);
+    color: white
 }
 .misc a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 

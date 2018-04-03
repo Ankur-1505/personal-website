@@ -22,6 +22,7 @@ export class ReadArticleComponent implements OnInit {
   authorid : string = "";
   user : any;
   articleid : any;
+  nightMode : boolean = false;
   constructor(private db : AngularFireDatabase, private route: ActivatedRoute, public authService : AuthServiceService, private auth : AngularFireAuth, private location: Location) { 
     
   }
@@ -56,6 +57,10 @@ export class ReadArticleComponent implements OnInit {
 
   editArticle() {
     this.location.back();
+  }
+
+  toggleNightMode(){
+    this.nightMode = !this.nightMode;
   }
    
 

@@ -30,6 +30,10 @@ export class WriteArticleComponent implements OnInit {
   imghttp : string; 
   articleUpdate : boolean = false;
   articleContent = '';
+  articleTitle = '';
+  articleDescription = '';
+  articleCategory = '';
+  articleid : any;
 
   cat: string[] = [
     'Technology',
@@ -44,10 +48,6 @@ export class WriteArticleComponent implements OnInit {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
-  }
- 
-  publishArticle(value: any){
-    console.log(value);
   }
 
   ngOnInit() {
@@ -66,6 +66,7 @@ export class WriteArticleComponent implements OnInit {
       if(params['id']){
         console.log(params['id']);
         let id : string = params['id'];
+        this.articleid = id;
         this.Article(id);
         this.articleUpdate = true;
       } else {
@@ -78,6 +79,7 @@ export class WriteArticleComponent implements OnInit {
     this.article = this.articleForm.value;
     this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
     this.articleheading = this.article.title.replace(/[\s,.#$\[\[]/g,'-');
+    this.articleid = this.articleheading;
     console.log(this.articleheading);
     this.db.database.ref('/articles/' + this.articleheading).set({
       title: this.article.title,
@@ -101,7 +103,7 @@ export class WriteArticleComponent implements OnInit {
     let uid = this.auth.auth.currentUser.uid;
     if(this.selectedFiles.item(0)){
       let file = this.selectedFiles.item(0);
-    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleheading + '/' + 'article-image' ,file);
+    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleid + '/' + 'article-image' ,file);
     this.imgsrc = uploadTask.downloadURL();
     console.log(this.imgsrc);
     const uploadFirebase = this.imgsrc.subscribe(src => {
@@ -117,6 +119,9 @@ export class WriteArticleComponent implements OnInit {
     this.articleObservable.subscribe(ref=> {
       this.articleContent = ref.body;
       this.imghttp = ref.articleImage;
+      this.articleCategory = ref.category;
+      this.articleTitle = ref.title;
+      this.articleDescription = ref.description;
     }) 
   } 
 

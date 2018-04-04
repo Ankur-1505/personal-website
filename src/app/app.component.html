@@ -4,7 +4,7 @@
     <body>
         
         <header>
-            <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark bg-black scrolling-navbar ie-nav" [containerInside]="false">
+            <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark navbar-default scrolling-navbar ie-nav" [containerInside]="false">
                 <logo>
                     <a class="logo navbar-brand" href="#">
                         <strong>Website</strong>
@@ -26,6 +26,9 @@
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
                             <a class="nav-link" href="login">Login</a>
                         </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
+                            <a class="nav-link"><img src="assets/guest.png" alt="" height="5px" width="5px" class="img-fluid rounded-circle z-depth-1 display-image">Guest</a>
+                        </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
                             <a class="nav-link" href="write-article">Write an Article</a>
                         </li>
@@ -34,6 +37,9 @@
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
                             <a class="nav-link"><img src="{{image}}" alt="" class="img-fluid rounded-circle z-depth-1 display-image" height="5px" width="5px">  {{name}}</a>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
+                            <a class="nav-link blank-link"></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav nav-flex-icons">

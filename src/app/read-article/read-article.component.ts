@@ -22,7 +22,9 @@ export class ReadArticleComponent implements OnInit {
   authorid : string = "";
   user : any;
   articleid : any;
+  authorName : any;
   nightMode : boolean = false;
+  showSpinner : boolean =  true;
   constructor(private db : AngularFireDatabase, private route: ActivatedRoute, public authService : AuthServiceService, private auth : AngularFireAuth, private location: Location) { 
     
   }
@@ -43,6 +45,8 @@ export class ReadArticleComponent implements OnInit {
   }
   this.article.subscribe(ref => {
     this.articleid = ref.id;
+    this.authorName = 'By ' + ref.authorName;
+    this.showSpinner = false;
     console.log(this.articleid);
   })
   }

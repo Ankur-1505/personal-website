@@ -15,8 +15,13 @@
 <main class="text-center py-5 read-page" [ngClass]="nightMode? 'night' : 'default'">
 
   <div class="container-fluid">
-      <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
-         
+      <div class="jumbotron" [ngClass]="showSpinner? 'z-depth-0' : 'z-depth-1'">
+          <div class="sk-folding-cube sk-folding-cube-red" *ngIf="showSpinner">
+              <div class="sk-cube1 sk-cube"></div>
+              <div class="sk-cube2 sk-cube"></div>
+              <div class="sk-cube4 sk-cube"></div>
+              <div class="sk-cube3 sk-cube"></div>
+          </div>         
         <div class="row">
             <div class="col-md-4">
             <img class="img-fluid z-depth-1" src="{{(article | async)?.articleImage}}" alt="">
@@ -24,8 +29,8 @@
           <div class="col-md-7 vertical-center">      
             <h1 class="blog-title read-title h1-responsive">{{ (article | async)?.title }}</h1>
             <h2 class="blog-category">{{ (article | async)?.category }}</h2>
-            <p class="blog-author read-author h2-responsive">By {{ (article | async)?.authorName }}</p>
-            <button class="btn btn-dark waves-light" (click)="toggleNightMode()" [ngClass]="nightMode? 'button-night' : 'button-default'" mdbRippleRadius><i class="fa fa-lightbulb-o"></i></button> 
+            <p class="blog-author read-author h2-responsive">{{this.authorName }}</p>
+            <button class="btn btn-dark waves-light" (click)="toggleNightMode()" *ngIf="!this.showSpinner" [ngClass]="nightMode? 'button-night' : 'button-default'" mdbRippleRadius><i class="fa fa-lightbulb-o"></i></button> 
             <div class="edit-menu align bottom" *ngIf="((this.authorid) == (article | async)?.authorUID)">        
               <button class="btn btn-primary waves-light" [routerLink]="['/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
               <button class="btn btn-danger waves-light" (click)="deleteArticle()" mdbRippleRadius><i class="fa fa-times mr-1"></i> Delete</button>
@@ -33,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="jumbotron wow fadeInUp" data-wow-delay="0.5s">
+      <div class="jumbotron" [ngClass]="showSpinner? 'z-depth-0' : 'z-depth-1'"data-wow-delay="0.5s">
       <p class="blog-description text-black h3-responsive">{{ (article | async)?.description }}</p>
       <div class="blog-description h3-responsive" [innerHTML]="(article | async)?.body"></div>
     </div>

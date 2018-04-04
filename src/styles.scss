@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar-default {
+    background: rgb(0,4,40);
+    background: linear-gradient(45deg, rgba(0,4,40,1) 0%, rgba(0,78,146,1) 100%);
+}
+.blank-link {
+    margin: 7px;
+}
 .login-page {
     margin-top: 6em;
     padding: 6em;
@@ -84,6 +91,9 @@
     -webkit-transform-origin: 100% 100%;
         -ms-transform-origin: 100% 100%;
             transform-origin: 100% 100%;
+  }
+  .sk-folding-cube-red .sk-cube:before {
+      background: #ff4444;
   }
   .sk-folding-cube .sk-cube2 {
     -webkit-transform: scale(1.1) rotateZ(90deg);

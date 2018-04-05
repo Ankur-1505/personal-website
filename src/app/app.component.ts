@@ -19,8 +19,10 @@ export class AppComponent {
     if(authService.user){
       this.user = this.auth.authState.subscribe(auth => {
         this.user = auth;
+        if(this.user != null) {
         this.name = this.user.displayName;
         this.image = this.user.photoURL;
+        }
       })
     }
     

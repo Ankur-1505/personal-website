@@ -43,6 +43,23 @@ export class WriteArticleComponent implements OnInit {
     'Miscellaneous'
   ]
 
+  public editorConfig = {
+    theme: 'bubble',
+    placeholder: "Enter Text Here",
+    modules: {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['link', 'image'],
+        ['clean']
+      ]
+    }
+  };
+
   constructor(private db : AngularFireDatabase,private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
     if(!(this.authService.user)){

@@ -21,7 +21,7 @@ export class WriteArticleComponent implements OnInit {
   articleForm : FormGroup;
   article : any;
   articleObservable : Observable<any>;
-  articleheading : String;
+  articleheading : any;
   user : any;
   authorName : string;
   file : File;
@@ -42,23 +42,6 @@ export class WriteArticleComponent implements OnInit {
     'Code',
     'Miscellaneous'
   ]
-
-  public editorConfig = {
-    theme: 'bubble',
-    placeholder: "Enter Text Here",
-    modules: {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['link', 'image'],
-        ['clean']
-      ]
-    }
-  };
 
   constructor(private db : AngularFireDatabase,private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
@@ -120,7 +103,7 @@ export class WriteArticleComponent implements OnInit {
     let uid = this.auth.auth.currentUser.uid;
     if(this.selectedFiles.item(0)){
       let file = this.selectedFiles.item(0);
-    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleid + '/' + 'article-image' ,file);
+    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleTitle.replace(/[\s,.#$\[\[]/g,'-') + '/' + 'article-image' ,file);
     this.imgsrc = uploadTask.downloadURL();
     console.log(this.imgsrc);
     const uploadFirebase = this.imgsrc.subscribe(src => {

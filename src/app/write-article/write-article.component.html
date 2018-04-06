@@ -51,11 +51,7 @@
 
     <div class="md-form">
         <i class="fa fa-pencil prefix grey-text"></i>
- 
-
-
-
-       <app-ngx-editor [placeholder]="'Enter text here...'"   [spellcheck]="true" formControlName="body" imageEndPoint="websiteproject-sanketnaik99.appspot.com/users/uWgdnPlr0CZe0IdyPzwOuNwybnz2" minHeight="400px">Hello</app-ngx-editor>
+       <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="articleContent"  [spellcheck]="true" formControlName="body" imageEndPoint="websiteproject-sanketnaik99.appspot.com/users/uWgdnPlr0CZe0IdyPzwOuNwybnz2" minHeight="400px"></app-ngx-editor>
        </div>
 
     <div class="row upload-image">

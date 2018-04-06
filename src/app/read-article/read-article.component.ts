@@ -1,3 +1,4 @@
+import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -23,9 +24,10 @@ export class ReadArticleComponent implements OnInit {
   user : any;
   articleid : any;
   authorName : any;
+  authorUID;
   nightMode : boolean = false;
   showSpinner : boolean =  true;
-  constructor(private db : AngularFireDatabase, private route: ActivatedRoute, public authService : AuthServiceService, private auth : AngularFireAuth, private location: Location) { 
+  constructor(private db : AngularFireDatabase, private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location) { 
     
   }
 
@@ -45,6 +47,7 @@ export class ReadArticleComponent implements OnInit {
   }
   this.article.subscribe(ref => {
     this.articleid = ref.id;
+    this.authorUID = ref.authorUID;
     this.authorName = 'By ' + ref.authorName;
     this.showSpinner = false;
     console.log(this.articleid);
@@ -52,7 +55,12 @@ export class ReadArticleComponent implements OnInit {
   }
   
   deleteArticle(){
-    this.db.object('/articles/' + this.id).remove().then(ref => {
+    var storageRef = this.store.storage.ref('users/' + this.authorUID + '/' + this.articleid + '/');
+    storageRef.child('article-image').delete().then(error => {
+      console.log(error);
+    })
+    storageRef.delete();
+    this.db.object('/articles/' + this.articleid).remove().then(ref => {
       console.log(ref);
       this.location.back();
     })

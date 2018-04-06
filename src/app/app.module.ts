@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
+import { UserComponent } from './user/user.component';
 
 
 var config = {
@@ -48,7 +49,7 @@ var config = {
     AboutComponent,
     BlogComponent,
     WriteArticleComponent,    
-    ReadArticleComponent, LoginComponent, UserAccountComponent, SpinnerComponent
+    ReadArticleComponent, LoginComponent, UserAccountComponent, SpinnerComponent, UserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import { AuthServiceService } from './../auth-service.service';
 import { Component, OnInit } from '@angular/core';
@@ -25,9 +26,9 @@ export class UserAccountComponent implements OnInit {
   file : File;
   selectedFiles : FileList;
   imgsrc : Observable<string>;
-  imghttp : string; 
+  imghttp : string;
   display: any;
-  constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) {
+  constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage, private db : AngularFireDatabase) {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
@@ -51,7 +52,12 @@ export class UserAccountComponent implements OnInit {
       photoURL : this.imghttp
     }).then(function(){
       console.log("success");
-    }); 
+    });
+      this.db.database.ref('/users/' + this.auth.auth.currentUser.uid).set({
+        displayName : this.authorName
+      }).then(success => {
+        console.log(success);
+      }) 
     console.log(this.auth.auth.currentUser.email);
     console.log(this.auth.auth.currentUser.displayName);   
   }
@@ -69,6 +75,7 @@ export class UserAccountComponent implements OnInit {
     
   }
 }
+
   uploadImage(imgsource) {
     this.imghttp = imgsource;
     console.log(this.auth.auth.currentUser);

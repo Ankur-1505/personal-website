@@ -1,3 +1,4 @@
+import { UserComponent } from './user/user.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { LoginComponent } from './login/login.component';
 import { ReadArticleComponent } from './read-article/read-article.component';
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path : 'login',
     component : LoginComponent
+  },
+  {
+    path: 'user/:id',
+    component : UserComponent
   },
   {
     path: 'user-account',

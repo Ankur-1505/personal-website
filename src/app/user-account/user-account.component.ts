@@ -1,7 +1,7 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import { AuthServiceService } from './../auth-service.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -23,11 +23,13 @@ export class UserAccountComponent implements OnInit {
   authorName : string;
   displayImage : File;
   uid : any;
+  description : any;
   file : File;
   selectedFiles : FileList;
   imgsrc : Observable<string>;
   imghttp : string;
-  display: any;
+  database: any;
+  authorDescription :  Observable<any>;
   constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage, private db : AngularFireDatabase) {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
@@ -36,32 +38,35 @@ export class UserAccountComponent implements OnInit {
       this.user = auth;
       this.email = this.user.email;
       this.authorName = this.user.displayName;
-      this.uid = this.user.uid,
-      this.imghttp = this.user.photoURL
+      this.uid = this.user.uid;
+      this.imghttp = this.user.photoURL;
+      this.authorDescription = this.db.object('/users/' + this.uid ).valueChanges();
+      console.log(this.authorDescription);
+    this.authorDescription.subscribe(ref => {
+      this.description = ref.description;
     })
-   }
+    });
+      
+  }
+
 
   ngOnInit() {
     
   }
+
+  //Update User-Account name
   updateName(name : string) {
     this.authorName = name;
     console.log(this.auth.auth.currentUser);
-    this.auth.auth.currentUser.updateProfile({
-      displayName : this.authorName,
-      photoURL : this.imghttp
-    }).then(function(){
-      console.log("success");
-    });
-      this.db.database.ref('/users/' + this.auth.auth.currentUser.uid).set({
-        displayName : this.authorName
-      }).then(success => {
-        console.log(success);
-      }) 
-    console.log(this.auth.auth.currentUser.email);
-    console.log(this.auth.auth.currentUser.displayName);   
+    this.updateAccount();
   }
 
+  updateDescription(description) {
+    this.authorDescription =  description;
+    this.updateAccount();
+  }
+
+  //Triggered when an image is selected
   selectImage(event) {
     this.selectedFiles = event.target.files;
     if(this.selectedFiles.item(0)){
@@ -72,21 +77,34 @@ export class UserAccountComponent implements OnInit {
     const uploadFirebase = this.imgsrc.subscribe(src => {
       this.uploadImage(src);
     })
-    
   }
 }
 
+
+  //Upload Image changes
   uploadImage(imgsource) {
     this.imghttp = imgsource;
-    console.log(this.auth.auth.currentUser);
-    console.log(imgsource.value);
-    this.auth.auth.currentUser.updateProfile({
-      displayName : this.authorName,
-      photoURL: this.imghttp
-    }).then(function(){
-      console.log("image Uploaded");
-    });
-    console.log(this.auth.auth.currentUser);
+    this.updateAccount();
+    }
+
+
+    //Update User acount 
+    updateAccount() {
+      this.auth.auth.currentUser.updateProfile({
+        displayName : this.authorName,
+        photoURL : this.imghttp
+      }).then(function(){
+        console.log("success");
+      });
+        this.db.database.ref('/users/' + this.auth.auth.currentUser.uid).set({
+          displayName : this.authorName,
+          photoURL : this.imghttp,
+          description : this.authorDescription
+        }).then(success => {
+          console.log(success);
+        }) 
+      console.log(this.auth.auth.currentUser.email);
+      console.log(this.auth.auth.currentUser.displayName);   
     }
   }
   

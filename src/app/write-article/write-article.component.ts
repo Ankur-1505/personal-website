@@ -34,6 +34,7 @@ export class WriteArticleComponent implements OnInit {
   articleDescription = '';
   articleCategory = '';
   articleid : any;
+  created_authUID : any;
 
   cat: string[] = [
     'Technology',
@@ -80,6 +81,7 @@ export class WriteArticleComponent implements OnInit {
     this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
     this.articleheading = this.article.title.replace(/[\s,.#$\[\[]/g,'-');
     this.articleid = this.articleheading;
+    this.created_authUID = this.article.createdAt + this.auth.auth.currentUser.uid;
     console.log(this.articleheading);
     this.db.database.ref('/articles/' + this.articleheading).set({
       title: this.article.title,
@@ -90,7 +92,8 @@ export class WriteArticleComponent implements OnInit {
       authorName : this.auth.auth.currentUser.displayName,
       authorUID : this.auth.auth.currentUser.uid,
       id: this.articleheading,
-      articleImage : this.imghttp
+      articleImage : this.imghttp,
+      created_authUID : this.created_authUID
     });
 
     this.router.navigate(['/blog']);
@@ -128,6 +131,7 @@ export class WriteArticleComponent implements OnInit {
   updateArticle() {
     this.article = this.articleForm.value;
     this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
+    this.created_authUID = this.article.createdAt + '_' + this.auth.auth.currentUser.uid;
     this.route.params.subscribe((params)=> {
       this.articleheading = params['id'];
     });
@@ -141,7 +145,8 @@ export class WriteArticleComponent implements OnInit {
       authorName : this.auth.auth.currentUser.displayName,
       authorUID : this.auth.auth.currentUser.uid,
       id: this.articleheading,
-      articleImage : this.imghttp
+      articleImage : this.imghttp,
+      created_authUID : this.created_authUID
     });
 
     this.router.navigate(['/blog']);

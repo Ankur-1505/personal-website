@@ -4,26 +4,46 @@
     
     <header></header>
 
-  <main class="login-page">
+  <main class="user-page">
     <div class="jumbotron">
-      <h1 class="h1-responsive text-center">About the author</h1>
+      <h1 class="h1-responsive text-center home-title">About the author.</h1>
+      <h4 class="h4-responsive text-center home-title">Here's some information about the author</h4>
       <hr>
       <div class="row">
           <!--Avatar-->
           <div class="col-12 col-sm-2">
-              <img src="http://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" class="img-fluid rounded-circle z-depth-1">
+              <img src="{{(userRef | async)?.photoURL}}" class="img-fluid rounded-circle z-depth-1">
           </div>
-          <!--Author Data-->
           <div class="col-12 col-sm-10">
-              <p class="author-name">John Doe</p>
+              <h2 class="author-name h2-responsive blog-title">{{(userRef | async)?.displayName}}</h2>
                   <i class="fa fa-facebook fa-2x icon"> </i>
                   <i class="fa fa-twitter fa-2x"> </i>
-              <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+              <h4 class="h4-responsive blog-description">{{(userRef | async)?.description}}</h4>
           </div>
       </div>
-  <!--/.Author box-->
-  
     </div>
+    <div class="sk-folding-cube sk-folding-cube-red" *ngIf="showSpinner">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>      
+    <div class="jumbotron" *ngIf="!this.showSpinner">
+        <h1 class="h1-responsive text-center home-title m-5">Some of {{(userRef | async)?.displayName}}'s posts.</h1>
+    <div class="row">
+        <div class="col-md-4 mb-5" *ngFor="let article of articlesObservable | async"><div class="jumbotron user-blog-card" [ngClass]="{tech : (article.category) == 'Technology',code : (article.category) == 'Code',travel : (article.category) == 'Travel',lifestyle : (article.category) == 'Lifestyle',misc : (article.category) == 'Miscellaneous' }">
+            <img class="img-fluid z-depth-1 mb-3" src="{{article.articleImage}}" alt="">
+            <h2 class="card-title text-center blog-title">{{article.title}}</h2>
+            <h3 class="card-title text-center blog-category">{{article.category}}</h3>
+            <h3 class="card-title text-center blog-author">By {{article.authorName}}</h3>
+            <h5 class="card-text blog-description">{{article.description}}</h5>
+            <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
+                <h5 class="waves-effect p-2 blog-read-more" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        </div></div>
+    </div>
+</div>
+    
   </main>
 
 </body>

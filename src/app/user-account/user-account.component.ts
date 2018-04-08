@@ -45,8 +45,7 @@ export class UserAccountComponent implements OnInit {
     this.authorDescription.subscribe(ref => {
       this.description = ref.description;
     })
-    });
-      
+    });     
   }
 
 

@@ -35,6 +35,7 @@ export class WriteArticleComponent implements OnInit {
   articleCategory = '';
   articleid : any;
   created_authUID : any;
+  uploadPercent : Observable<number>;
 
   cat: string[] = [
     'Technology',
@@ -108,6 +109,7 @@ export class WriteArticleComponent implements OnInit {
       let file = this.selectedFiles.item(0);
     const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleTitle.replace(/[\s,.#$\[\[]/g,'-') + '/' + 'article-image' ,file);
     this.imgsrc = uploadTask.downloadURL();
+    this.uploadPercent = uploadTask.percentageChanges();
     console.log(this.imgsrc);
     const uploadFirebase = this.imgsrc.subscribe(src => {
       this.imghttp = src;

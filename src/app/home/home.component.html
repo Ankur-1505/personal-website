@@ -15,10 +15,10 @@
 
         <div class="view intro">
             <div class="full-bg-img">
-                <div class="mask rgba-black-light-5 flex-center">
+                <div class="mask flex-baseline">
                     <div class="container text-center white-text">
                         <div class="white-text text-center wow animated fadeInUp">
-                            <h1 class="home-title">Welcome.</h1>
+                            <h1 class="home-title intro-text">Welcome.</h1>
                             <h2 class="home-description">Keep scrolling to explore</h2>
                         </div>
                     </div>
@@ -36,7 +36,19 @@
             <h1 class="home-title text-black">Blog.</h1>
             <h2 class="home-description">Check out some of the latest posts</h2>
         </div>
-        <div class="space"></div>
+        <div class="spinner" *ngIf="this.showSpinner"></div>
+        <div class="row mt-3 mx-2" *ngIf="!this.showSpinner">
+            <div class="col-md-4 mb-5" *ngFor="let article of articlesObservable | async"><div class="jumbotron user-blog-card" [ngClass]="{tech : (article.category) == 'Technology',code : (article.category) == 'Code',travel : (article.category) == 'Travel',lifestyle : (article.category) == 'Lifestyle',misc : (article.category) == 'Miscellaneous' }">
+                <img class="img-fluid z-depth-1 mb-3" src="{{article.articleImage}}" alt="">
+                <h2 class="card-title text-center blog-title">{{article.title}}</h2>
+                <h3 class="card-title text-center blog-category">{{article.category}}</h3>
+                <h3 class="card-title text-center blog-author">By {{article.authorName}}</h3>
+                <h5 class="card-text blog-description">{{article.description}}</h5>
+                <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
+                    <h5 class="waves-effect p-2 blog-read-more" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>
+                </a>
+            </div></div>
+        </div>
         
 
         <div class="containter-fluid wow fadeInUp" data-wow-delay="0.2s">

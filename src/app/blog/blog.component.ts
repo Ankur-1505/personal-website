@@ -1,3 +1,4 @@
+import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import { BlogpostsService } from './../blogposts.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class BlogComponent implements OnInit {
 
+  postsCollection : AngularFirestoreCollection<any>;
   id: any;
   articles : any;
   showSpinner : boolean =  true;
@@ -22,29 +24,21 @@ export class BlogComponent implements OnInit {
   size = 0;
 
 
-  constructor(private db : AngularFireDatabase) {
+  constructor(private afs : AngularFirestore) {
 
   }
 
   ngOnInit() {
     console.log('true');
-    this.articles = this.db.list('/articles', ref => ref.orderByChild('createdAt'));
-    this.articlesObservable = this.getArticles('/articles');
-    console.log("works");
-    console.log(this.articlesObservable);
+    this.postsCollection = this.afs.collection('articles');
+    this.articlesObservable = this.postsCollection.valueChanges();
     this.articlesObservable.subscribe(() => {
       this.showSpinner = false;
-      console.log('false')
     })
+    console.log(this.articlesObservable)
   }
   onScroll(){
 
   }
-  getArticles(listPath) : Observable<any> {
-    
-    return this.db.list('/articles', ref => ref.orderByChild('createdAt')).valueChanges().map(articles => {
-      return articles.reverse();
-    })
-
-  }
+ 
 }

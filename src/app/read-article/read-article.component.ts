@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthServiceService } from '../auth-service.service';
 import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class ReadArticleComponent implements OnInit {
   authorUID;
   nightMode : boolean = false;
   showSpinner : boolean =  true;
-  constructor(private db : AngularFireDatabase, private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location) { 
+  constructor(private db : AngularFireDatabase, private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location) { 
     
   }
 
@@ -36,15 +37,17 @@ export class ReadArticleComponent implements OnInit {
       this.id = params['id'];
       //console.log(this.id);
    });
-   let path = '/articles/' + this.id;
+   let path = 'articles/' + this.id;
    //console.log('path : ' + path);
-   this.article = this.db.object(path).valueChanges();
+   /*this.article = this.db.object(path).valueChanges();*/
    if((this.authService.user)){
     this.user = this.auth.authState.subscribe(auth => {
       this.user = auth;
       this.authorid = this.user.uid;
     })
+
   }
+  this.article = this.afs.doc<any>(path).valueChanges();
   this.article.subscribe(ref => {
     this.articleid = ref.id;
     this.authorUID = ref.authorUID;
@@ -60,7 +63,7 @@ export class ReadArticleComponent implements OnInit {
       console.log(error);
     })
     storageRef.delete();
-    this.db.object('/articles/' + this.articleid).remove().then(ref => {
+    this.afs.doc<any>('articles/' + this.id).delete().then(ref => {
       console.log(ref);
       this.location.back();
     })

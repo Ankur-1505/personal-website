@@ -94,23 +94,11 @@ export class WriteArticleComponent implements OnInit {
 
   public onFormSubmit(){
     this.article = this.articleForm.value;
-    this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
+    this.article.createdAt = firebase.firestore.FieldValue.serverTimestamp()
     this.articleheading = this.article.title.replace(/[\s,.#$\[\[]/g,'-');
     this.articleid = this.articleheading;
     this.created_authUID = this.article.createdAt + this.auth.auth.currentUser.uid;
     console.log(this.articleheading);
-    this.db.database.ref('/articles/' + this.articleheading).set({
-      title: this.article.title,
-      description : this.article.description,
-      body : this.article.body,
-      category : this.article.category,
-      createdAt : this.article.createdAt,
-      authorName : this.auth.auth.currentUser.displayName,
-      authorUID : this.auth.auth.currentUser.uid,
-      id: this.articleheading,
-      articleImage : this.imghttp,
-      created_authUID : this.created_authUID
-    });
     this.postsCollection = this.afs.collection<post>('articles');
     this.postsCollection.doc(this.articleid).set({
       title: this.article.title,
@@ -146,7 +134,7 @@ export class WriteArticleComponent implements OnInit {
 }
 
   Article(id : string){
-    this.articleObservable = this.db.object('/articles/' + id).valueChanges();
+    this.articleObservable = this.afs.doc<any>('articles/' + id).valueChanges();
     console.log(this.articleObservable);
     this.articleObservable.subscribe(ref=> {
       this.articleContent = ref.body;
@@ -165,7 +153,7 @@ export class WriteArticleComponent implements OnInit {
       this.articleheading = params['id'];
     });
     console.log(this.articleheading);
-    this.db.database.ref('/articles/' + this.articleheading).set({
+    this.afs.doc<any>('articles/' + this.articleheading).update({
       title: this.article.title,
       description : this.article.description,
       body : this.article.body,
@@ -174,10 +162,8 @@ export class WriteArticleComponent implements OnInit {
       authorName : this.auth.auth.currentUser.displayName,
       authorUID : this.auth.auth.currentUser.uid,
       id: this.articleheading,
-      articleImage : this.imghttp,
-      created_authUID : this.created_authUID
+      articleImage : this.imghttp
     });
-
     this.router.navigate(['/blog']);
     
   }

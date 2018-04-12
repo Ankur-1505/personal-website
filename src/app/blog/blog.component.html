@@ -29,10 +29,10 @@
                 <img class="img-fluid z-depth-1 " src="{{article.articleImage}}" alt="">
             </div>
             <div class="col-md-8">
-                <h2 class="card-title text-center blog-title">{{article.title}}</h2>
-            <h3 class="card-title text-center blog-category">{{article.category}}</h3>
-            <h3 class="card-title text-center blog-author">By {{article.authorName}}</h3>
-            <h5 class="card-text blog-description">{{article.description}}</h5>
+                <h2 class="card-title text-center h2-responsive blog-title">{{article.title}}</h2>
+            <h3 class="card-title text-center h3-responsive blog-category">{{article.category}}</h3>
+            <h3 class="card-title h3-responsive text-center blog-author">By {{article.authorName}}</h3>
+            <h5 class="card-text h5-responsive blog-description">{{article.description}}</h5>
             <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
                 <h5 class="waves-effect p-2 blog-read-more" mdbRippleRadius>Read more <i class="fa fa-chevron-right"></i></h5>
             </a>

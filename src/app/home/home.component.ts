@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import { AuthServiceService } from '../auth-service.service';
+import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 
 @Component({
@@ -14,23 +15,18 @@ export class HomeComponent implements OnInit {
 
   articlesObservable : Observable<any>;
   showSpinner : boolean =  true;
+  postsCollection : AngularFirestoreCollection<any>;
 
-  constructor(private auth : AngularFireAuth, public authService : AuthServiceService, private db : AngularFireDatabase) { }
+  constructor(private auth : AngularFireAuth, public authService : AuthServiceService, private afs : AngularFirestore) { }
 
   ngOnInit() {
-    this.articlesObservable = this.getArticles('/articles');
-        this.articlesObservable.subscribe(ref => {
-          this.showSpinner = false;
-        })
+    this.postsCollection = this.afs.collection('articles');
+    this.articlesObservable = this.postsCollection.valueChanges();
+    this.articlesObservable.subscribe(()=> this.showSpinner = false)
+    console.log(this.articlesObservable)
   }
   logout() {
     this.authService.logout();
   }
-  getArticles(listPath) : Observable<any> {
-    
-    return this.db.list('/articles', ref => ref.orderByChild('createdAt').limitToLast(3)).valueChanges().map(articles => {
-      return articles.reverse();
-    })
-
-  }
+  
 }

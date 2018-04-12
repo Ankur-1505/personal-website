@@ -1,6 +1,8 @@
+import { BlogpostsService } from './../blogposts.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
 
 
 
@@ -15,6 +17,11 @@ export class BlogComponent implements OnInit {
   articles : any;
   showSpinner : boolean =  true;
   articlesObservable : Observable<any>;
+  start = 0 ;
+  end : any;
+  size = 0;
+
+
   constructor(private db : AngularFireDatabase) {
 
   }
@@ -29,6 +36,9 @@ export class BlogComponent implements OnInit {
       this.showSpinner = false;
       console.log('false')
     })
+  }
+  onScroll(){
+
   }
   getArticles(listPath) : Observable<any> {
     

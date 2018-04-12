@@ -9,7 +9,19 @@ import * as firebase from 'firebase/app';
 import { AuthServiceService } from '../auth-service.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
+interface post {
+  title : string,
+  description : string,
+  body : string,
+  category : string,
+  createdAt : any,
+  authorUID : string,
+  articleImage : any,
+  id : string,
+  authorName : any
+}
 
 @Component({
   selector: 'app-write-article',
@@ -18,12 +30,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WriteArticleComponent implements OnInit {
 
+  postsCollection : AngularFirestoreCollection<post>;
+  posts : Observable<post>;
   articleForm : FormGroup;
   article : any;
   articleObservable : Observable<any>;
   articleheading : any;
   user : any;
-  authorName : string;
+  authorName : any;
   file : File;
   selectedFiles : FileList;
   imgsrc : Observable<string>;
@@ -45,7 +59,7 @@ export class WriteArticleComponent implements OnInit {
     'Miscellaneous'
   ]
 
-  constructor(private db : AngularFireDatabase,private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
+  constructor(private db : AngularFireDatabase,private afs : AngularFirestore, private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
@@ -59,6 +73,7 @@ export class WriteArticleComponent implements OnInit {
       category: new FormControl(),
       body: new FormControl()
     });
+    
     this.auth.authState.subscribe(auth => {
       this.user = auth;
       console.log("success");
@@ -96,6 +111,18 @@ export class WriteArticleComponent implements OnInit {
       articleImage : this.imghttp,
       created_authUID : this.created_authUID
     });
+    this.postsCollection = this.afs.collection<post>('articles');
+    this.postsCollection.doc(this.articleid).set({
+      title: this.article.title,
+      description : this.article.description,
+      body : this.article.body,
+      category : this.article.category,
+      createdAt : this.article.createdAt,
+      authorName : this.auth.auth.currentUser.displayName,
+      authorUID : this.auth.auth.currentUser.uid,
+      id: this.articleheading,
+      articleImage : this.imghttp
+    })
 
     this.router.navigate(['/blog']);
   } 

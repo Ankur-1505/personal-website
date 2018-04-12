@@ -1,3 +1,4 @@
+import { BlogpostsService } from './blogposts.service';
 import { AuthServiceService } from './auth-service.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { environment } from './../environments/environment';
@@ -12,7 +13,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { NgxEditorModule } from 'ngx-editor';
-
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { UserComponent } from './user/user.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 var config = {
@@ -58,15 +60,17 @@ var config = {
     MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
     NgxEditorModule,
     FormsModule,
     HttpClientModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    InfiniteScrollModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ AuthServiceService ],
+  providers: [ AuthServiceService, BlogpostsService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

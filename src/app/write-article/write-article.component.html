@@ -49,8 +49,7 @@
     
     </div>
 
-    <div class="md-form">
-        <i class="fa fa-pencil prefix grey-text"></i>
+    <div class="md-form black-text">
        <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="articleContent"  [spellcheck]="true" formControlName="body" imageEndPoint="websiteproject-sanketnaik99.appspot.com/users/uWgdnPlr0CZe0IdyPzwOuNwybnz2" minHeight="400px"></app-ngx-editor>
        </div>
 
@@ -64,6 +63,9 @@
             <div class="col-md-5">
               <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
               <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg,.jpeg" />
+              <div class="progress">
+                <div class="progress-bar" [style.width]="(uploadPercent | async) + '%'"></div>
+              </div>
             </div>                
           </div> 
 

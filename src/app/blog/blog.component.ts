@@ -30,7 +30,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     console.log('true');
-    this.postsCollection = this.afs.collection('articles');
+    this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc'));
     this.articlesObservable = this.postsCollection.valueChanges();
     this.articlesObservable.subscribe(() => {
       this.showSpinner = false;

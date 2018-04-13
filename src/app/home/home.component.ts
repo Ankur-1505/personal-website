@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(private auth : AngularFireAuth, public authService : AuthServiceService, private afs : AngularFirestore) { }
 
   ngOnInit() {
-    this.postsCollection = this.afs.collection('articles');
+    this.postsCollection = this.afs.collection('articles',ref=> ref.orderBy('createdAt', 'desc').limit(3));
     this.articlesObservable = this.postsCollection.valueChanges();
     this.articlesObservable.subscribe(()=> this.showSpinner = false)
     console.log(this.articlesObservable)

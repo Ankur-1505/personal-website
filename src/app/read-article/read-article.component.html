@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="jumbotron" [ngClass]="showSpinner? 'z-depth-0' : 'z-depth-1'"data-wow-delay="0.5s">
+      <div class="jumbotron" class="article-body" [ngClass]="showSpinner? 'z-depth-0' : 'z-depth-1'"data-wow-delay="0.5s">
       <p class="blog-description text-black h3-responsive">{{ (article | async)?.description }}</p>
       <div class="blog-description h3-responsive" [innerHTML]="(article | async)?.body"></div>
     </div>

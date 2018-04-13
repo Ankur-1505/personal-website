@@ -1,6 +1,7 @@
 .body{
     margin-top: 6em;
-    padding: 6em;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .home-title{
     font-family: 'Rubik', sans-serif;
@@ -34,4 +35,6 @@
 .progress-bar { 
     height: 8px;
 }
-  
+.generate-link {
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}

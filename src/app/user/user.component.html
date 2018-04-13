@@ -28,7 +28,7 @@
             <div class="sk-cube4 sk-cube"></div>
             <div class="sk-cube3 sk-cube"></div>
         </div>      
-    <div class="jumbotron" *ngIf="!this.showSpinner">
+    <div class="jumbotron">
         <h1 class="h1-responsive text-center home-title m-5">Some of {{(userRef | async)?.displayName}}'s posts.</h1>
     <div class="row">
         <div class="col-md-4 mb-5" *ngFor="let article of articlesObservable | async"><div class="jumbotron user-blog-card" [ngClass]="{tech : (article.category) == 'Technology',code : (article.category) == 'Code',travel : (article.category) == 'Travel',lifestyle : (article.category) == 'Lifestyle',misc : (article.category) == 'Miscellaneous' }">

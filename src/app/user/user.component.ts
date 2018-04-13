@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-user',
@@ -10,18 +11,22 @@ import { Observable } from 'rxjs/Rx';
 })
 export class UserComponent implements OnInit {
   path : any;
+  usersCollection : AngularFirestoreCollection<any>;
   userRef : Observable<any>;
+  Collection : AngularFirestoreCollection<any>;
   articlesObservable : Observable<any>;
   showSpinner : boolean =  true;
 
-  constructor(private route: ActivatedRoute, private db : AngularFireDatabase) { }
+  constructor(private route: ActivatedRoute, private afs : AngularFirestore, private db : AngularFireDatabase) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       if(params['id']){
         this.path = params['id'];
-        this.userRef = this.db.object('/users/' + this.path).valueChanges();
-        this.articlesObservable = this.getArticles('/articles');
+        this.usersCollection = this.afs.collection('users');
+        this.userRef = this.usersCollection.doc<any>(this.path).valueChanges();
+        this.usersCollection = this.afs.collection('articles', ref=> ref.where('authorUID', '==', this.path).orderBy('createdAt','desc'));
+        this.articlesObservable = this.usersCollection.valueChanges();
         this.articlesObservable.subscribe(ref => {
           this.showSpinner = false;
         })

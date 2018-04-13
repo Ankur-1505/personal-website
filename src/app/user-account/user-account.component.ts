@@ -1,3 +1,4 @@
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import { AuthServiceService } from './../auth-service.service';
@@ -8,8 +9,6 @@ import * as firebase from 'firebase/app';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 
-
-
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
@@ -17,6 +16,8 @@ import { AngularFireStorage } from 'angularfire2/storage';
 })
 export class UserAccountComponent implements OnInit {
 
+  usersCollection : AngularFirestoreCollection<any>;
+  posts : Observable<any>;
   email : string;
   user : any;
   name : string;
@@ -30,7 +31,7 @@ export class UserAccountComponent implements OnInit {
   imghttp : string;
   database: any;
   authorDescription :  Observable<any>;
-  constructor(private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage, private db : AngularFireDatabase) {
+  constructor(private router: Router, private afs : AngularFirestore, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage, private db : AngularFireDatabase) {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
@@ -95,13 +96,12 @@ export class UserAccountComponent implements OnInit {
       }).then(function(){
         console.log("success");
       });
-        this.db.database.ref('/users/' + this.auth.auth.currentUser.uid).set({
+        this.usersCollection = this.afs.collection('users');
+        this.usersCollection.doc<any>(this.auth.auth.currentUser.uid).set({
           displayName : this.authorName,
           photoURL : this.imghttp,
           description : this.authorDescription
-        }).then(success => {
-          console.log(success);
-        }) 
+        })
       console.log(this.auth.auth.currentUser.email);
       console.log(this.auth.auth.currentUser.displayName);   
     }

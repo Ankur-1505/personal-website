@@ -50,6 +50,8 @@ export class WriteArticleComponent implements OnInit {
   articleid : any;
   created_authUID : any;
   uploadPercent : Observable<number>;
+  imgurl : any;
+  uploadPercent2 : Observable<number>;
 
   cat: string[] = [
     'Technology',
@@ -115,6 +117,20 @@ export class WriteArticleComponent implements OnInit {
     this.router.navigate(['/blog']);
   } 
 
+  imageURL(event) {
+    this.selectedFiles = event.target.files;
+    let uid = this.auth.auth.currentUser.uid;
+    if(this.selectedFiles.item(0)){
+      let file = this.selectedFiles.item(0);
+      console.log(file);
+    const uploadTask = this.afStorage.upload('/users/' + uid + '/' + this.articleTitle.replace(/[\s,.#$\[\[]/g,'-') + '/' + file.name ,file);
+    this.imgurl = uploadTask.downloadURL();
+    this.uploadPercent2 = uploadTask.percentageChanges(); 
+    const uploadFirebase = this.imgurl.subscribe(src => {
+      this.imgurl = src;
+    })
+  }
+}
   
 
   selectImage(event) {

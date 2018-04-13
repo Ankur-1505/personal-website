@@ -32,6 +32,7 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { UserComponent } from './user/user.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 var config = {
@@ -67,7 +68,8 @@ var config = {
     FormsModule,
     HttpClientModule,
     AngularFireStorageModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ClipboardModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService, BlogpostsService ],

@@ -14,8 +14,22 @@
 </header>
 
 <main>
-    
     <div class="container blog-page">
+    <div class="row justify-content-md-center my-2">
+        <div class="col"></div>
+        <div class="col col-lg-2"><div class="btn-group" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle waves-light float-left" mdbRippleRadius>
+                    Category
+                </button>
+                            
+                <div class="dropdown-menu dropdown-primary">
+                <a class="dropdown-item" (click)="getPosts()">All</a>
+                <div *ngFor="let cats of cat">
+                    <a class="dropdown-item" (click)="sort(cats)">{{cats}}</a>
+                </div>
+            </div>
+            </div></div>
+    </div>
     <div class="sk-folding-cube" *ngIf="showSpinner">
         <div class="sk-cube1 sk-cube"></div>
         <div class="sk-cube2 sk-cube"></div>

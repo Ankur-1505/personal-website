@@ -23,6 +23,14 @@ export class BlogComponent implements OnInit {
   end : any;
   size = 0;
 
+  cat: string[] = [
+    'Technology',
+    'Lifestyle',
+    'Travel',
+    'Code',
+    'Miscellaneous'
+  ]
+
 
   constructor(private afs : AngularFirestore) {
 
@@ -30,8 +38,8 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     console.log('true');
-    this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc'));
-    this.articlesObservable = this.postsCollection.valueChanges();
+    
+    this.getPosts();
     this.articlesObservable.subscribe(() => {
       this.showSpinner = false;
     })
@@ -39,6 +47,19 @@ export class BlogComponent implements OnInit {
   }
   onScroll(){
 
+  }
+  getPosts() {
+    this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc'));
+    this.articlesObservable = this.postsCollection.valueChanges();
+    
+  }
+  sort(category : string){
+    this.showSpinner = true;
+    this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc').where('category', '==', category));
+    this.articlesObservable = this.postsCollection.valueChanges();
+    this.articlesObservable.subscribe(() => {
+      this.showSpinner = false;
+    })
   }
  
 }

@@ -33,6 +33,7 @@ import { SpinnerComponent } from './ui/spinner/spinner.component';
 import { UserComponent } from './user/user.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ScrollingDirective } from './scrolling.directive';
 
 
 var config = {
@@ -52,7 +53,7 @@ var config = {
     AboutComponent,
     BlogComponent,
     WriteArticleComponent,    
-    ReadArticleComponent, LoginComponent, UserAccountComponent, SpinnerComponent, UserComponent
+    ReadArticleComponent, LoginComponent, UserAccountComponent, SpinnerComponent, UserComponent, ScrollingDirective
   ],
   imports: [
     BrowserModule,

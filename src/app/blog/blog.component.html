@@ -36,7 +36,7 @@
         <div class="sk-cube4 sk-cube"></div>
         <div class="sk-cube3 sk-cube"></div>
     </div>
-    <span *ngFor="let article of articlesObservable | async" >
+    <div class="container-blog" *ngFor="let article of post.data | async" >
     <div class="jumbotron" [ngClass]="{tech : (article.category) == 'Technology',code : (article.category) == 'Code',travel : (article.category) == 'Travel',lifestyle : (article.category) == 'Lifestyle',misc : (article.category) == 'Miscellaneous' }">
         <div class="row" >
             <div class="col-md-4 blog-header">
@@ -53,7 +53,18 @@
             </div>
         </div>
     </div>
-</span>
+</div>
+<div class="sk-folding-cube" *ngIf="post.loading | async">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+</div>
+<button type="button" (click)="onScroll()" *ngIf="!(post.done | async)" class="btn btn-primary btn-default btn-lg btn-block waves-light" mdbRippleRadius>Primary</button>
+
+<div *ngIf="post.done | async">
+  End of database... That's all folks!
+</div>
 
     </div>
 </main>

@@ -14,21 +14,19 @@
 </header>
 
 <main>
-    <div class="container blog-page">
-    <div class="row justify-content-md-center my-2">
-        <div class="col"></div>
-        <div class="col col-lg-2"><div class="btn-group" dropdown>
-                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle waves-light float-left" mdbRippleRadius>
+    <div class="container blog-page" infiniteScroll infiniteScrollContainer [infiniteScrollDistance]="3" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+    <div class="row justify-content-md-center my-4">
+        <div class="btn-group justify-content-md-center" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle waves-light" mdbRippleRadius>
                     Category
                 </button>
                             
                 <div class="dropdown-menu dropdown-primary">
-                <a class="dropdown-item" (click)="getPosts()">All</a>
                 <div *ngFor="let cats of cat">
-                    <a class="dropdown-item" (click)="sort(cats)">{{cats}}</a>
+                    <a class="dropdown-item" [routerLink]="['/blog', cats]">{{cats}}</a>
                 </div>
             </div>
-            </div></div>
+            </div>
     </div>
     <div class="sk-folding-cube" *ngIf="showSpinner">
         <div class="sk-cube1 sk-cube"></div>
@@ -60,10 +58,8 @@
     <div class="sk-cube4 sk-cube"></div>
     <div class="sk-cube3 sk-cube"></div>
 </div>
-<button type="button" (click)="onScroll()" *ngIf="!(post.done | async)" class="btn btn-primary btn-default btn-lg btn-block waves-light" mdbRippleRadius>Primary</button>
-
 <div *ngIf="post.done | async">
-  End of database... That's all folks!
+        <h2 class="home-description text-black text-center">You've reached the end!</h2>
 </div>
 
     </div>

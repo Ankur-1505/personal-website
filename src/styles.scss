@@ -1,7 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 .navbar-default {
-    background: #0575e6;
-    background: linear-gradient(90deg, rgba(5,117,230,1) 0%, rgba(2,27,121,1) 100%);
+    background: #FFFFFF;
+    color: #424242;
+}
+links ul li {
+    color: #424242;
+    padding-bottom: 3px;
+}
+.nav-link {
+    padding-bottom: 0px;
+    margin-bottom: 2px;
+}
+.highlight {
+    padding-bottom: 3px;
+}
+links ul li:hover .highlight {
+    background: #2962ff;
 }
 .blank-link {
     margin: 7px;
@@ -42,7 +56,7 @@
     margin-right: 10px;
 }
 .blog-title {
-    font-family: 'Slabo 27px', serif;
+    font-family: 'Bitter', serif;
 }
 .blog-category {
     font-family: 'Oswald', sans-serif;

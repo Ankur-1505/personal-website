@@ -4,7 +4,7 @@
     <body>
         
         <header>
-            <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark navbar-default scrolling-navbar ie-nav" [containerInside]="false">
+            <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar ie-nav" [containerInside]="false">
                 <logo>
                     <a class="logo navbar-brand" href="#">
                         <strong>Website</strong>
@@ -15,24 +15,41 @@
                         <li class="nav-item waves-light" mdbRippleRadius>
                             <a class="nav-link" href="home">Home
                             </a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius>
                             <a class="nav-link" href="about">About</a>
+                            <div class="highlight"></div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius>
+                        <!--<li class="nav-item waves-light" mdbRippleRadius>
                             <a class="nav-link" href="blog">Blog</a>
+                            <div class="highlight"></div>
+                        </li> -->
+                        <li class="nav-item dropdown" dropdown>
+                            <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                            Blog<span class="caret"></span></a>
+                            <div class="highlight"></div>
+                            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu" >
+                                <div *ngFor="let cats of cat"> 
+                                <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/blog', cats]">{{cats}}</a>
+                            </div>
+                            </div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
                             <a class="nav-link" href="login">Login</a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
                             <a class="nav-link"><img src="assets/guest.png" alt="" height="5px" width="5px" class="img-fluid rounded-circle display-image">Guest</a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
                             <a class="nav-link" href="write-article">Write an Article</a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
                             <a class="nav-link" (click)="logout()">Logout</a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
                             <a class="nav-link"><img src="{{image}}" alt="" class="img-fluid rounded-circle z-depth-1 display-image" height="5px" width="5px">  {{name}}</a>
@@ -46,16 +63,19 @@
                                     <a class="nav-link" href="user-account">
                                         <i class="fa fa-gear"></i>
                                     </a>
+                                    <div class="highlight"></div>
                                 </li>
                         <li class="nav-item waves-light" mdbRippleRadius>
                             <a class="nav-link">
                                 <i class="fa fa-twitter"></i>
                             </a>
+                            <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius>
                             <a class="nav-link">
                                 <i class="fa fa-instagram"></i>
                             </a>
+                            <div class="highlight"></div>
                         </li>
                     </ul>
                 </links>

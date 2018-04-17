@@ -14,6 +14,15 @@ export class AppComponent {
   name : string = "";
   user : any;
   image : string;
+
+  cat: string[] = [
+    'All',
+    'Technology',
+    'Lifestyle',
+    'Travel',
+    'Code',
+    'Miscellaneous'
+  ]
   constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService) 
   { 
     if(authService.user){

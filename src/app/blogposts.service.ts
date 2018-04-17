@@ -1,3 +1,4 @@
+import { empty } from 'rxjs/observable/empty';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -30,13 +31,14 @@ export class BlogpostsService {
   data: Observable<any>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
+  newData : boolean = false;
 
 
   constructor(private afs: AngularFirestore) { }
 
   // Initial query sets options and defines the Observable
   // passing opts will override the defaults
-  init(path: string, field: string, category : string, opts?: any) {
+  init(newData : boolean, path: string, field: string, category : string, opts?: any) {
     this.query  = { 
       path,
       field,
@@ -46,6 +48,7 @@ export class BlogpostsService {
       prepend: false,
       ...opts
     }
+    this.newData = newData;
 
     const first = this.afs.collection(this.query.path, ref => {
       if(this.query.category) {
@@ -106,6 +109,12 @@ export class BlogpostsService {
 
   // Maps the snapshot to usable format the updates source
   private mapAndUpdate(col: AngularFirestoreCollection<any>) {
+
+    if(this.newData = true){
+      this._data.next([]);
+      this._loading.next(false);
+      this._done.next(false);
+    }
 
     if (this._done.value || this._loading.value) { return };
 

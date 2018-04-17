@@ -5,6 +5,10 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { empty } from "rxjs/observable/empty";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-blog',
@@ -22,9 +26,12 @@ export class BlogComponent implements OnInit {
   end : any;
   size = 0;
   lastdata : any;
+  category : any;
+  newData : boolean = true;
   
 
   cat: string[] = [
+    'All',
     'Technology',
     'Lifestyle',
     'Travel',
@@ -33,26 +40,33 @@ export class BlogComponent implements OnInit {
   ]
 
 
-  constructor(private afs : AngularFirestore, private post : BlogpostsService) {
+  constructor(private afs : AngularFirestore, public post : BlogpostsService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    console.log('true');
-    this.post.init('articles','createdAt', '',{ reverse: true, prepend: false });    
-    /*this.getPosts();
-    this.articlesObservable.subscribe(() => {
-      this.showSpinner = false;
-    })
-    console.log(this.articlesObservable)*/
+    this.route.params.subscribe(params => {
+      params['category'];
+      this.category = params['category'];
+      console.log(this.category);
+      this.getPosts(this.category);
+   });
+   
+   
+    
   }
   onScroll(){
     console.log("scrolled");
     this.post.more();
   }
-  getPosts() {
-    this.post.data;
-    this.post.init('articles','createdAt', '',{ reverse: true, prepend: false });    
+  getPosts(category : string) {
+    if(category=='All' || (!category)){
+      this.post.init(this.newData, 'articles','createdAt', '',{ reverse: true, prepend: false });   
+    }
+    else {
+      this.post.init(this.newData, 'articles','createdAt', category,{ reverse: true, prepend: false });   
+    }
+     
   }
   Posts(){
     
@@ -64,10 +78,5 @@ export class BlogComponent implements OnInit {
         this.showSpinner = false;
       })
     })
-  }
-  sort(category : string){
-    this.post.data;
-    this.post.init('articles','createdAt', category,{ reverse: true, prepend: false });    
-  }
- 
+  } 
 }

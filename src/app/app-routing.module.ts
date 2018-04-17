@@ -39,6 +39,10 @@ const routes: Routes = [
     component: ReadArticleComponent
   },
   {
+    path: 'blog/:category',
+    component : BlogComponent
+  },
+  {
     path : 'login',
     component : LoginComponent
   },

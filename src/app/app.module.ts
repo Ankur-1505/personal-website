@@ -42,7 +42,8 @@ var config = {
   databaseURL: "https://websiteproject-sanketnaik99.firebaseio.com",
   projectId: "websiteproject-sanketnaik99",
   storageBucket: "websiteproject-sanketnaik99.appspot.com",
-  messagingSenderId: "624648720335"
+  messagingSenderId: "624648720335",
+  gcm_sender_id : "103953800507"
 };
 
 

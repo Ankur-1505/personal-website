@@ -13,12 +13,12 @@
                 <links>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item waves-light" mdbRippleRadius>
-                            <a class="nav-link" href="home">Home
+                            <a class="nav-link" [routerLink]="['/home']">Home
                             </a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius>
-                            <a class="nav-link" href="about">About</a>
+                            <a class="nav-link" [routerLink]="['/about']">About</a>
                             <div class="highlight"></div>
                         </li>
                         <!--<li class="nav-item waves-light" mdbRippleRadius>
@@ -31,12 +31,12 @@
                             <div class="highlight"></div>
                             <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu" >
                                 <div *ngFor="let cats of cat"> 
-                                <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/blog', cats]">{{cats}}</a>
+                                <a class="dropdown-item waves-light" [routerLink]="['/blog', cats]">{{cats}}</a>
                             </div>
                             </div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
-                            <a class="nav-link" href="login">Login</a>
+                            <a class="nav-link" [routerLink]="['/login']">Login</a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
@@ -44,7 +44,7 @@
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
-                            <a class="nav-link" href="write-article">Write an Article</a>
+                            <a class="nav-link" [routerLink]="['/write-article']">Write an Article</a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
@@ -60,7 +60,7 @@
                     </ul>
                     <ul class="navbar-nav nav-flex-icons">
                             <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
-                                    <a class="nav-link" href="user-account">
+                                    <a class="nav-link" [routerLink]="['/user-account']">
                                         <i class="fa fa-gear"></i>
                                     </a>
                                     <div class="highlight"></div>

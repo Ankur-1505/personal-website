@@ -2,7 +2,8 @@ import { AuthServiceService } from './auth-service.service';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
-
+import * as firebase from 'firebase';
+import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,9 @@ export class AppComponent {
   name : string = "";
   user : any;
   image : string;
+  userUID : any;
+
+  messaging = firebase.messaging();
 
   cat: string[] = [
     'All',
@@ -23,7 +27,7 @@ export class AppComponent {
     'Code',
     'Miscellaneous'
   ]
-  constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService) 
+  constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService, private afs : AngularFirestore) 
   { 
     if(authService.user){
       this.user = this.auth.authState.subscribe(auth => {
@@ -32,11 +36,46 @@ export class AppComponent {
         this.name = this.user.displayName;
         this.image = this.user.photoURL;
         }
-      })
+        /*this.auth.auth.signInAnonymously()
+        .catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });*/
+      }) 
     }
-    
+   /* this.auth.auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var isAnonymous = user.isAnonymous;
+        this.userUID = user.uid;
+        console.log(this.userUID)
+        // ...)
+      }
+    });
+    this.messaging.requestPermission().then(() => {
+      console.log('Permission Granted');
+      return this.messaging.getToken();
+    }).then(token => {
+      console.log(token);
+      this.updateToken(this.userUID, token)
+    }).catch((err) => {
+      console.log(err);
+    }) */
+  }
+  setUID(uid){
+    this.userUID = uid;
   }
   logout() {
     this.authService.logout();
+  }
+  updateToken(userid,token){
+    this.auth.authState.take(1).subscribe(user => {
+      if (!user) return;
+   
+    const data = { [user.uid] : token };
+    this.afs.collection<any>('fcmTokens/').add(data);
+  })
   }
 }

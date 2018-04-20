@@ -18,14 +18,17 @@ export class HomeComponent implements OnInit {
   articlesObservable : Observable<any>;
   showSpinner : boolean =  true;
   postsCollection : AngularFirestoreCollection<any>;
+  date;
 
   constructor(private auth : AngularFireAuth, public authService : AuthServiceService, private afs : AngularFirestore) { }
 
   ngOnInit() {
     this.postsCollection = this.afs.collection('articles',ref=> ref.orderBy('createdAt', 'desc').limit(3));
     this.articlesObservable = this.postsCollection.valueChanges();
-    this.articlesObservable.subscribe(()=> this.showSpinner = false)
-    console.log(this.articlesObservable)
+    this.articlesObservable.subscribe((article)=> {
+      this.showSpinner = false;
+      
+    });
   }
   logout() {
     this.authService.logout();

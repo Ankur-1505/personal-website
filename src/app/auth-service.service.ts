@@ -8,10 +8,11 @@ import * as firebase from 'firebase/app';
 export class AuthServiceService {
 
   private authState : any;
-  user: Observable<firebase.User>;
+  user: any;
 
   constructor(public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+    this.user = afAuth.auth.currentUser;
+    console.log(this.user)
    }
 
    login(email: string, password: string) {
@@ -24,6 +25,14 @@ export class AuthServiceService {
         console.log('Something went wrong:',err.message);
       });
       this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+  }
+  anonymous(){
+    console.log('anonymous')
+    this.afAuth.auth.signInAnonymously()
+    .catch(err => {
+      console.log('Something went wrong:',err.message);
+    });
+    this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   }
 
 

@@ -1,5 +1,5 @@
 .view {
-    background: url("../../assets/homeimage.jpeg")no-repeat center center;
+    background: url("../../assets/homeimage.jpg")no-repeat center center;
     background-size: cover;
 }
 .home-title{
@@ -24,9 +24,6 @@
     padding: 0;
     min-height: 100%;
     margin-bottom: 10px;
-}
-.shade {
-    background-color: #2962ff;
 }
 .spinner {
     width: 40px;
@@ -68,6 +65,15 @@
   .home-blog-title {
     color: #424242;
   }
+  .home-author{
+    color: #757575;
+  }
+  .home-blog-description {
+    color: #616161;
+  }
+
+
+
   .techcat {
     text-decoration: none;
     color:  rgba(126,87,194,1)

@@ -35,17 +35,15 @@ export class AppComponent {
         if(this.user != null) {
         this.name = this.user.displayName;
         this.image = this.user.photoURL;
+        console.log('user')
         }
-        /*this.auth.auth.signInAnonymously()
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ...
-        });*/
       }) 
-    }
-   /* this.auth.auth.onAuthStateChanged(function(user) {
+    } /*else {
+      console.log('no user')
+      authService.anonymous();
+      console.log(authService.user); 
+
+    this.auth.auth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
         var isAnonymous = user.isAnonymous;
@@ -62,7 +60,9 @@ export class AppComponent {
       this.updateToken(this.userUID, token)
     }).catch((err) => {
       console.log(err);
-    }) */
+      this.router.navigate(['/login']);
+    })
+    } */
   }
   setUID(uid){
     this.userUID = uid;

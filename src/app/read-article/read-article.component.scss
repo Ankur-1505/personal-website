@@ -1,14 +1,6 @@
 .read-page {
     margin-top: 30px;
 }
-.read-title{
-    
-    margin-top: 40px;
-}
-.read-author {
-    margin-top: 30px;
-    
-}
 .space {
     margin-bottom: 12rem;
 }
@@ -28,10 +20,52 @@
     background: white;
     color: black;
 }
+.read-title{
+    margin-top: 20px;
+    color: #424242;
+}
+.read-author {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #757575;
+}
+.read-body {
+    color: #616161;
+}
+
+
+.techcat {
+    text-decoration: none;
+    color:  rgba(126,87,194,1)
+  }
+  .codecat{
+    color: rgba(255,109,0,1);
+  }
+  .lifestylecat{
+    color: rgba(236,64,122,1);
+  }
+  .travelcat{
+    color: rgba(38,166,154,1);
+  }
+  .misccat {
+    color: rgba(0,137,123,1);
+  }
+
+
+
 .night {
     background: black;
     color: white;
 }
 .night .jumbotron{
     background: black;
+}
+.night .read-title {
+    color : white
+}
+.night .read-author{
+    color: white
+}
+.night .read-body{
+    color:  white;
 }

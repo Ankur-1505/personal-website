@@ -35,31 +35,31 @@
                             </div>
                             </div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
                             <a class="nav-link" [routerLink]="['/login']">Login</a>
                             <div class="highlight"></div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
                             <a class="nav-link"><img src="assets/guest.png" alt="" height="5px" width="5px" class="img-fluid rounded-circle display-image">Guest</a>
                             <div class="highlight"></div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
                             <a class="nav-link" [routerLink]="['/write-article']">Write an Article</a>
                             <div class="highlight"></div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
                             <a class="nav-link" (click)="logout()">Logout</a>
                             <div class="highlight"></div>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
                             <a class="nav-link"><img src="{{image}}" alt="" class="img-fluid rounded-circle z-depth-1 display-image" height="5px" width="5px">  {{name}}</a>
                         </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.user | async)">
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
                             <a class="nav-link blank-link"></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav nav-flex-icons">
-                            <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.user | async)">
+                            <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
                                     <a class="nav-link" [routerLink]="['/user-account']">
                                         <i class="fa fa-gear"></i>
                                     </a>

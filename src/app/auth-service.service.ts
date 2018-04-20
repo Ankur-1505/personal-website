@@ -9,9 +9,10 @@ export class AuthServiceService {
 
   private authState : any;
   user: any;
-
+  admin : boolean = false;
+  ifuser : any;
   constructor(public afAuth: AngularFireAuth) {
-    this.user = afAuth.auth.currentUser;
+    this.user = afAuth.authState;
     console.log(this.user)
    }
 
@@ -25,10 +26,11 @@ export class AuthServiceService {
         console.log('Something went wrong:',err.message);
       });
       this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+      this.admin = true;
   }
   anonymous(){
     console.log('anonymous')
-    this.afAuth.auth.signInAnonymously()
+    this.afAuth.auth.signInAnonymouslyAndRetrieveData()
     .catch(err => {
       console.log('Something went wrong:',err.message);
     });
@@ -38,6 +40,7 @@ export class AuthServiceService {
 
   logout() {
     this.afAuth.auth.signOut();
+    this.admin = false;
   }
 
 }

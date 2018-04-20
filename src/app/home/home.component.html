@@ -44,7 +44,7 @@
                 <img class="img-fluid z-depth-1 mb-3" src="{{article.articleImage}}" alt="">
                 <h2 class="card-title text-center blog-title home-blog-title px-3">{{article.title}}</h2>
                 <a [routerLink]="['/blog', article.category]" [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }"><h3 class="card-title text-center bold blog-category" >{{article.category}}</h3></a>
-                <h5 class="card-title h4-responsive text-center blog-author home-author">{{article.authorName}} | <time>{{article.createdAt | date : fullDate}}</time></h5>
+                <h5 class="card-title text-center blog-author home-author">{{article.authorName}} | <time>{{article.createdAt | date : fullDate}}</time></h5>
                 </div>
                 <hr class="mt-0 mx-2">
                 <h5 class="card-text blog-description mx-4 home-blog-description">{{article.description}}</h5>

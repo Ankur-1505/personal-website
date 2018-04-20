@@ -24,6 +24,7 @@ export class ReadArticleComponent implements OnInit {
   authorid : string = "";
   user : any;
   articleid : any;
+  date;
   authorName : any;
   authorUID;
   nightMode : boolean = false;
@@ -53,6 +54,7 @@ export class ReadArticleComponent implements OnInit {
     this.authorUID = ref.authorUID;
     this.authorName = 'By ' + ref.authorName;
     this.showSpinner = false;
+    this.category = ref.category;
     console.log(this.articleid);
   })
   }

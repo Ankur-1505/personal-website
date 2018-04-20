@@ -36,12 +36,16 @@ export class AppComponent {
         this.name = this.user.displayName;
         this.image = this.user.photoURL;
         console.log('user')
+        } else {
+          console.log('no user')
+          authService.anonymous();
+          console.log(authService.user);
+          this.enableNotifications(); 
         }
+        
       }) 
-    } /*else {
-      console.log('no user')
-      authService.anonymous();
-      console.log(authService.user); 
+    }
+     /*
 
     this.auth.auth.onAuthStateChanged(function(user) {
       if (user) {
@@ -52,17 +56,7 @@ export class AppComponent {
         // ...)
       }
     });
-    this.messaging.requestPermission().then(() => {
-      console.log('Permission Granted');
-      return this.messaging.getToken();
-    }).then(token => {
-      console.log(token);
-      this.updateToken(this.userUID, token)
-    }).catch((err) => {
-      console.log(err);
-      this.router.navigate(['/login']);
-    })
-    } */
+     */
   }
   setUID(uid){
     this.userUID = uid;
@@ -78,4 +72,17 @@ export class AppComponent {
     this.afs.collection<any>('fcmTokens/').add(data);
   })
   }
-}
+  enableNotifications(){
+    this.messaging.requestPermission().then(() => {
+      console.log('Permission Granted');
+      return this.messaging.getToken();
+    }).then(token => {
+      console.log(token);
+      this.updateToken(this.userUID, token)
+    }).catch((err) => {
+      console.log(err);
+      this.router.navigate(['/login']);
+    })
+    }
+  }
+

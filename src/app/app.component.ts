@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AuthServiceService } from './auth-service.service';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -27,8 +28,10 @@ export class AppComponent {
     'Code',
     'Miscellaneous'
   ]
-  constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService, private afs : AngularFirestore) 
+  constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService, private afs : AngularFirestore, private http : HttpClient) 
   { 
+    this.messaging.usePublicVapidKey("BDey1pUU_jCAL8HR-062WocoKVO7J0V21lA28dUlISub4I5zEH-uOiOif3_4_AFCTGgTrFNEyk6_hvtgBMNQ3v0");
+
     if(authService.user){
       this.user = this.auth.authState.subscribe(auth => {
         this.user = auth;
@@ -81,8 +84,23 @@ export class AppComponent {
       this.updateToken(this.userUID, token)
     }).catch((err) => {
       console.log(err);
-      this.router.navigate(['/login']);
     })
     }
+
+    message(){
+      console.log('sent')
+      this.http.post("https://fcm.googleapis.com/fcm/send", {
+        "Content-Type" : "application/json",
+        "Authorization" : "BDey1pUU_jCAL8HR-062WocoKVO7J0V21lA28dUlISub4I5zEH-uOiOif3_4_AFCTGgTrFNEyk6_hvtgBMNQ3v0",
+        "message" : {
+          "token" : "fUI4h_LzfR0:APA91bGN0R3DV6Ao-LqsqaMS01Lf8oliK8pb2SQfdINzwMKdDgv4BIkGu7HSYSv7y5Rkmb219dB7IqRJlKzrlwwquNhh91Pn6NcaZEbt5VKdgATxaOaM7-ePyE8a9VVstWn8Mx4ubXzu",
+          "notification" : {
+            "body" : "This is an FCM notification message!",
+            "title" : "FCM Message"
+          }
+        }
+      })
+    }
+
   }
 

@@ -40,6 +40,10 @@
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
+                            <a class="nav-link" (click)="message()">send</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
                             <a class="nav-link"><img src="assets/guest.png" alt="" height="5px" width="5px" class="img-fluid rounded-circle display-image">Guest</a>
                             <div class="highlight"></div>
                         </li>

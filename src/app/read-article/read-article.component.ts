@@ -38,6 +38,7 @@ export class ReadArticleComponent implements OnInit {
       this.id = params['id'];
       //console.log(this.id);
    });
+
    let path = 'articles/' + this.id;
    //console.log('path : ' + path);
    /*this.article = this.db.object(path).valueChanges();*/
@@ -46,7 +47,6 @@ export class ReadArticleComponent implements OnInit {
       this.user = auth;
       this.authorid = this.user.uid;
     })
-
   }
   this.article = this.afs.doc<any>(path).valueChanges();
   this.article.subscribe(ref => {
@@ -55,6 +55,7 @@ export class ReadArticleComponent implements OnInit {
     this.authorName = 'By ' + ref.authorName;
     this.showSpinner = false;
     this.category = ref.category;
+    this.date = ref.createdAt;
     console.log(this.articleid);
   })
   }

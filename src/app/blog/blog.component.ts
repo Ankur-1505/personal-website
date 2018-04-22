@@ -41,18 +41,18 @@ export class BlogComponent implements OnInit {
 
 
   constructor(private afs : AngularFirestore, public post : BlogpostsService, private route: ActivatedRoute) {
-
-  }
-
-  ngOnInit() {
     this.route.params.subscribe(params => {
       params['category'];
       this.category = params['category'];
       console.log(this.category);
+      this.post.clear();
+      this.newData = true;
       this.getPosts(this.category);
    });
    
-   
+  }
+
+  ngOnInit() {
     
   }
   onScroll(){
@@ -71,7 +71,7 @@ export class BlogComponent implements OnInit {
   Posts(){
     
     this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc'));
-    this.articlesObservable = this.postsCollection.snapshotChanges().map(actions => {
+    this.articlesObservable = this.postsCollection.valueChanges().map(actions => {
       actions.map(a=> {
         this.lastdata = a.payload.doc.id;
         console.log(this.lastdata);

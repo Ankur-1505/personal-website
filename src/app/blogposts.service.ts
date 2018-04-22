@@ -31,7 +31,9 @@ export class BlogpostsService {
   data: Observable<any>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
-  newData : boolean = false;
+  newData : boolean;
+  usercollection  : any;
+  user : any;
 
 
   constructor(private afs: AngularFirestore) { }
@@ -48,7 +50,13 @@ export class BlogpostsService {
       prepend: false,
       ...opts
     }
+    
     this.newData = newData;
+    if(this.newData = true){
+      this._data.next([]);
+      this._loading.next(false);
+      this._done.next(false);
+    }
 
     const first = this.afs.collection(this.query.path, ref => {
       if(this.query.category) {
@@ -96,6 +104,11 @@ export class BlogpostsService {
     this.mapAndUpdate(more)
   }
 
+  clear(){
+    this._data.next([]);
+      this._loading.next(false);
+      this._done.next(false);
+  }
 
   // Determines the doc snapshot to paginate query 
   private getCursor() {
@@ -145,6 +158,12 @@ export class BlogpostsService {
     .take(1)
     .subscribe()
 
+  }
+
+  getUser(id : string){
+    this.usercollection = this.afs.collection<any>('users');
+    this.user = this.usercollection.doc(id).valuechanges();
+    return this.user.displayName;    
   }
 
 }

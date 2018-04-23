@@ -31,16 +31,12 @@
                             <div class="highlight"></div>
                             <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu" >
                                 <div *ngFor="let cats of cat"> 
-                                <a class="dropdown-item waves-light" [routerLink]="['/blog', cats]">{{cats}}</a>
+                                <a class="dropdown-item waves-light" href="/blog/{{cats}}">{{cats}}</a>
                             </div>
                             </div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
                             <a class="nav-link" [routerLink]="['/login']">Login</a>
-                            <div class="highlight"></div>
-                        </li>
-                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
-                            <a class="nav-link" (click)="message()">send</a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">

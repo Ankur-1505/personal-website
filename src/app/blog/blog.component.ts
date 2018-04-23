@@ -56,7 +56,6 @@ export class BlogComponent implements OnInit {
     
   }
   onScroll(){
-    console.log("scrolled");
     this.post.more();
   }
   getPosts(category : string) {
@@ -68,15 +67,5 @@ export class BlogComponent implements OnInit {
     }
      
   }
-  Posts(){
-    
-    this.postsCollection = this.afs.collection('articles', ref=> ref.orderBy('createdAt', 'desc'));
-    this.articlesObservable = this.postsCollection.valueChanges().map(actions => {
-      actions.map(a=> {
-        this.lastdata = a.payload.doc.id;
-        console.log(this.lastdata);
-        this.showSpinner = false;
-      })
-    })
-  } 
+
 }

@@ -86,21 +86,5 @@ export class AppComponent {
       console.log(err);
     })
     }
-
-    message(){
-      console.log('sent')
-      this.http.post("https://fcm.googleapis.com/fcm/send", {
-        "Content-Type" : "application/json",
-        "Authorization" : "BDey1pUU_jCAL8HR-062WocoKVO7J0V21lA28dUlISub4I5zEH-uOiOif3_4_AFCTGgTrFNEyk6_hvtgBMNQ3v0",
-        "message" : {
-          "token" : "fUI4h_LzfR0:APA91bGN0R3DV6Ao-LqsqaMS01Lf8oliK8pb2SQfdINzwMKdDgv4BIkGu7HSYSv7y5Rkmb219dB7IqRJlKzrlwwquNhh91Pn6NcaZEbt5VKdgATxaOaM7-ePyE8a9VVstWn8Mx4ubXzu",
-          "notification" : {
-            "body" : "This is an FCM notification message!",
-            "title" : "FCM Message"
-          }
-        }
-      })
-    }
-
   }
 

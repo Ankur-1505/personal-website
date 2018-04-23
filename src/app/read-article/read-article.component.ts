@@ -73,6 +73,12 @@ export class ReadArticleComponent implements OnInit {
     
   }
 
+  onDestroy(){
+    this.article.subscribe(res => {
+      return Observable.empty();
+    })
+  }
+
   editArticle() {
     this.location.back();
   }

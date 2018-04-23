@@ -7,3 +7,12 @@
 .card-title {
     margin-top: 15px;
 }
+@media only screen and (max-width: 768px) {
+    .jumbotron {
+        padding: 0;
+    }
+    .contents {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    }

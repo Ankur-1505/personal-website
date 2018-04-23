@@ -45,7 +45,7 @@ export class BlogpostsService {
       path,
       field,
       category,
-      limit: 2,
+      limit: 3,
       reverse: false,
       prepend: false,
       ...opts
@@ -54,6 +54,7 @@ export class BlogpostsService {
     this.newData = newData;
     if(this.newData = true){
       this._data.next([]);
+      this.data;
       this._loading.next(false);
       this._done.next(false);
     }

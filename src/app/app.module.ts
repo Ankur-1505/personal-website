@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -71,7 +72,8 @@ var config = {
     HttpClientModule,
     AngularFireStorageModule,
     InfiniteScrollModule,
-    ClipboardModule
+    ClipboardModule,
+    ShareButtonsModule.forRoot()
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService, BlogpostsService ],

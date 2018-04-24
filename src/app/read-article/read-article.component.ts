@@ -4,10 +4,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {Location} from '@angular/common';
+import { ShareButtons } from '@ngx-share/core';
 import { Subscription } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthServiceService } from '../auth-service.service';
 import { Router } from '@angular/router';
+import { Meta , Title} from '@angular/platform-browser';
 import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 
@@ -27,9 +29,11 @@ export class ReadArticleComponent implements OnInit {
   date;
   authorName : any;
   authorUID;
+  articledescription : string;
+  articletitle : string; 
   nightMode : boolean = false;
   showSpinner : boolean =  true;
-  constructor(private db : AngularFireDatabase, private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location) { 
+  constructor(private db : AngularFireDatabase, private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location, private meta : Meta, public share: ShareButtons) { 
     
   }
 
@@ -54,12 +58,24 @@ export class ReadArticleComponent implements OnInit {
     this.authorUID = ref.authorUID;
     this.authorName = 'By ' + ref.authorName;
     this.showSpinner = false;
+    this.articledescription = ref.description;
+    this.articletitle = ref.title;
     this.category = ref.category;
     this.date = ref.createdAt;
+    this.updateTags();
     console.log(this.articleid);
   })
   }
   
+  updateTags() {
+    this.meta.updateTag({name : 'twitter:card', content : 'summary'})
+    this.meta.updateTag({name : 'og:title', content : this.articletitle});
+    this.meta.updateTag({name : 'og:description', content : this.articledescription});
+    this.meta.updateTag({name : 'og:image', content : 'https://d30y9cdsu7xlg0.cloudfront.net/png/44220-200.png'});
+    this.meta.updateTag({name : 'og:url', content : 'https://websiteproject-sanketnaik99.firebaseapp.com/read-article/' + this.articleid});
+    this.meta.updateTag({name : 'og:type', content : 'website'});
+  }
+
   deleteArticle(){
     var storageRef = this.store.storage.ref('users/' + this.authorUID + '/' + this.articleid + '/');
     storageRef.child('article-image').delete().then(error => {

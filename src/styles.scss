@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@ngx-share/button/styles/share-buttons';
+@import '~@ngx-share/button/styles/themes/default/default-theme';
 .navbar-default {
     background: #FFFFFF;
     color: #424242;
@@ -221,4 +223,21 @@ links ul li:hover .highlight {
               transform: perspective(140px) rotateY(180deg);
       opacity: 0; 
     }
+  }
+
+  .techcat {
+    text-decoration: none;
+    color:  rgba(126,87,194,1)
+  }
+  .codecat{
+    color: rgba(255,109,0,1);
+  }
+  .lifestylecat{
+    color: rgba(236,64,122,1);
+  }
+  .travelcat{
+    color: rgba(38,166,154,1);
+  }
+  .misccat {
+    color: rgba(0,137,123,1);
   }

@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
    
+<meta charset="utf-8">
     
 
 </head>
@@ -34,6 +35,12 @@
             <div class="edit-menu align bottom" *ngIf="((this.authorid) == (article | async)?.authorUID)">        
               <button class="btn btn-primary waves-light" [routerLink]="['/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
               <button class="btn btn-danger waves-light" (click)="deleteArticle()" mdbRippleRadius><i class="fa fa-times mr-1"></i> Delete</button>
+            </div>
+            <div class="share-buttons self-center mb-2">
+              <share-buttons [theme]="'default'"
+              [include]="['facebook','twitter','google','whatsapp','email','copy']"
+              [show]="2"
+              [autoSetMeta]="false"></share-buttons>
             </div>
           </div>
         </div>

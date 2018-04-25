@@ -1,7 +1,11 @@
 {
-  "short_name": "PersonalProject",
+  "short_name": "Website",
   "name": "Website",
   "start_url": "/?utm_source=homescreen",
+  "theme_color" : "#0575e6",
+  "background_color" : "#ffffff",
+  "display" : "standalone",
+  "orientation" : "portrait",
 
   "gcm_sender_id": "103953800507"
 }

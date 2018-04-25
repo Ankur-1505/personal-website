@@ -66,6 +66,7 @@ export class AppComponent {
   }
   logout() {
     this.authService.logout();
+    this.router.navigate(['/home']);
   }
   updateToken(userid,token){
     this.auth.authState.take(1).subscribe(user => {

@@ -53,7 +53,8 @@ export class ReadArticleComponent implements OnInit {
     })
   }
   this.article = this.afs.doc<any>(path).valueChanges();
-  this.article.subscribe(ref => {
+  this.article.subscribe(
+    ref => {
     this.articleid = ref.id;
     this.authorUID = ref.authorUID;
     this.authorName = 'By ' + ref.authorName;
@@ -62,19 +63,11 @@ export class ReadArticleComponent implements OnInit {
     this.articletitle = ref.title;
     this.category = ref.category;
     this.date = ref.createdAt;
-    this.updateTags();
     console.log(this.articleid);
-  })
-  }
-  
-  updateTags() {
-    this.meta.updateTag({name : 'twitter:card', content : 'summary'})
-    this.meta.updateTag({name : 'og:title', content : this.articletitle});
-    this.meta.updateTag({name : 'og:description', content : this.articledescription});
-    this.meta.updateTag({name : 'og:image', content : 'https://d30y9cdsu7xlg0.cloudfront.net/png/44220-200.png'});
-    this.meta.updateTag({name : 'og:url', content : 'https://websiteproject-sanketnaik99.firebaseapp.com/read-article/' + this.articleid});
-    this.meta.updateTag({name : 'og:type', content : 'website'});
-  }
+  },
+  err => console.log(err),
+);
+}
 
   deleteArticle(){
     var storageRef = this.store.storage.ref('users/' + this.authorUID + '/' + this.articleid + '/');

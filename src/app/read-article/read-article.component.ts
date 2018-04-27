@@ -1,5 +1,4 @@
 import { AngularFireStorage } from 'angularfire2/storage';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -33,7 +32,7 @@ export class ReadArticleComponent implements OnInit {
   articletitle : string; 
   nightMode : boolean = false;
   showSpinner : boolean =  true;
-  constructor(private db : AngularFireDatabase, private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location, private meta : Meta, public share: ShareButtons) { 
+  constructor(private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location, public meta : Meta, public share: ShareButtons) { 
     
   }
 
@@ -57,7 +56,7 @@ export class ReadArticleComponent implements OnInit {
     ref => {
     this.articleid = ref.id;
     this.authorUID = ref.authorUID;
-    this.authorName = 'By ' + ref.authorName;
+    this.authorName = ref.authorName;
     this.showSpinner = false;
     this.articledescription = ref.description;
     this.articletitle = ref.title;
@@ -66,6 +65,12 @@ export class ReadArticleComponent implements OnInit {
     console.log(this.articleid);
   },
   err => console.log(err),
+  () => {
+    this.meta.updateTag({ name: 'og:title', content: this.articletitle });
+    this.meta.updateTag({ name: 'og:description', content: this.articledescription });
+    this.meta.updateTag({ name: 'twitter:title', content: this.articletitle });
+    this.meta.updateTag({ name: 'twitter:description', content: this.articledescription });
+  }
 );
 }
 

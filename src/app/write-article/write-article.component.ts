@@ -61,7 +61,7 @@ export class WriteArticleComponent implements OnInit {
     'Miscellaneous'
   ]
 
-  constructor(private db : AngularFireDatabase,private afs : AngularFirestore, private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
+  constructor(private afs : AngularFirestore, private route: ActivatedRoute, private router: Router, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) 
   {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
@@ -96,7 +96,7 @@ export class WriteArticleComponent implements OnInit {
 
   public onFormSubmit(){
     this.article = this.articleForm.value;
-    this.article.createdAt = firebase.firestore.FieldValue.serverTimestamp()
+    this.article.createdAt = firebase.firestore.FieldValue.serverTimestamp();
     this.articleheading = this.article.title.replace(/[\s,.#$\[\[]/g,'-');
     this.articleid = this.articleheading;
     this.created_authUID = this.article.createdAt + this.auth.auth.currentUser.uid;
@@ -163,7 +163,7 @@ export class WriteArticleComponent implements OnInit {
 
   updateArticle() {
     this.article = this.articleForm.value;
-    this.article.createdAt = firebase.database.ServerValue.TIMESTAMP;
+    this.article.createdAt = firebase.firestore.FieldValue.serverTimestamp()
     this.created_authUID = this.article.createdAt + '_' + this.auth.auth.currentUser.uid;
     this.route.params.subscribe((params)=> {
       this.articleheading = params['id'];

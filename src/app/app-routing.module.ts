@@ -1,9 +1,6 @@
-import { UserComponent } from './user/user.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { LoginComponent } from './login/login.component';
-import { ReadArticleComponent } from './read-article/read-article.component';
 import { WriteArticleComponent } from './write-article/write-article.component';
-import { BlogComponent } from './blog/blog.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -24,35 +21,15 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent
+    loadChildren: './posts.module#PostsModule'
   },
   {
-    path: 'write-article',
-    component: WriteArticleComponent
+    path: 'admin',
+    loadChildren: './admin.module#AdminModule'
   },
   {
-    path : 'write-article/:id',
-    component: WriteArticleComponent
-  },
-  {
-    path: 'read-article/:id',
-    component: ReadArticleComponent
-  },
-  {
-    path: 'blog/:category',
-    component : BlogComponent
-  },
-  {
-    path : 'login',
-    component : LoginComponent
-  },
-  {
-    path: 'user/:id',
-    component : UserComponent
-  },
-  {
-    path: 'user-account',
-    component : UserAccountComponent
+    path: 'auth',
+    loadChildren: './auth.module#AuthModule'
   }
 ];
 

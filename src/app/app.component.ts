@@ -43,7 +43,7 @@ export class AppComponent {
           console.log('no user')
           authService.anonymous();
           console.log(authService.user);
-          this.enableNotifications(); 
+         // this.enableNotifications(); 
         }
         
       }) 

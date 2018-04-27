@@ -11,6 +11,10 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false,
+  },
     "lib": [
       "es2017",
       "dom"

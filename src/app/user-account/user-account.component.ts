@@ -31,7 +31,7 @@ export class UserAccountComponent implements OnInit {
   imghttp : string;
   database: any;
   authorDescription :  Observable<any>;
-  constructor(private router: Router, private afs : AngularFirestore, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage, private db : AngularFireDatabase) {
+  constructor(private router: Router, private afs : AngularFirestore, private auth : AngularFireAuth, public authService : AuthServiceService, private afStorage: AngularFireStorage) {
     if(!(this.authService.user)){
       this.router.navigate(['/login']);
     }
@@ -41,7 +41,7 @@ export class UserAccountComponent implements OnInit {
       this.authorName = this.user.displayName;
       this.uid = this.user.uid;
       this.imghttp = this.user.photoURL;
-      this.authorDescription = this.db.object('/users/' + this.uid ).valueChanges();
+      this.authorDescription = this.afs.doc('users/' + this.uid ).valueChanges();
       console.log(this.authorDescription);
     this.authorDescription.subscribe(ref => {
       this.description = ref.description;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Rx';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
@@ -17,7 +16,7 @@ export class UserComponent implements OnInit {
   articlesObservable : Observable<any>;
   showSpinner : boolean =  true;
 
-  constructor(private route: ActivatedRoute, private afs : AngularFirestore, private db : AngularFireDatabase) { }
+  constructor(private route: ActivatedRoute, private afs : AngularFirestore) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -25,7 +24,7 @@ export class UserComponent implements OnInit {
         this.path = params['id'];
         this.usersCollection = this.afs.collection('users');
         this.userRef = this.usersCollection.doc<any>(this.path).valueChanges();
-        this.usersCollection = this.afs.collection('articles', ref=> ref.where('authorUID', '==', this.path).orderBy('createdAt','desc'));
+        this.usersCollection = this.afs.collection('articles', ref=> ref.where('authorUID', '==', this.path).orderBy('createdAt','desc').limit(3));
         this.articlesObservable = this.usersCollection.valueChanges();
         this.articlesObservable.subscribe(ref => {
           this.showSpinner = false;
@@ -33,14 +32,6 @@ export class UserComponent implements OnInit {
       }
       
     })
-  }
-
-  getArticles(listPath) : Observable<any> {
-    
-    return this.db.list('/articles', ref => ref.orderByChild('authorUID').equalTo(this.path).limitToFirst(3)).valueChanges().map(articles => {
-      return articles.reverse();
-    })
-
   }
 
 }

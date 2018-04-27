@@ -3,22 +3,6 @@
 <head>
 
    
-  <!-- COMMON TAGS -->
-  <meta charset="utf-8">
-  <title>Read</title>
-  <!-- Search Engine -->
-  <meta name="description" content="{{this.articledescription}}">
-  <!-- Schema.org for Google -->
-  <meta itemprop="name" content="{{this.articletitle}}">
-  <meta itemprop="description" content="random">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="{{this.articletitle}}">
-  <meta name="twitter:description" content="{{this.articledescription}}">
-  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-  <meta name="og:title" content="{{this.articletitle}}">
-  <meta name="og:description" content="{{this.articledescription}}">
-  <meta name="og:type" content="website">
 
     
 
@@ -46,10 +30,10 @@
           <div class="col-md-7 vertical-center">      
             <h1 class="blog-title read-title">{{ (article | async)?.title }}</h1>
             <h3 class="card-title text-center bold blog-category" [ngClass]="{techcat : (category) == 'Technology',codecat : (category) == 'Code',travelcat : (category) == 'Travel',lifestylecat : (category) == 'Lifestyle',misccat : (category) == 'Miscellaneous', night : nightMode == true }">{{category}}</h3>
-            <h4 class="blog-author read-author" [routerLink]="['/user', this.authorUID]">{{this.authorName }} | <time>{{(article | async)?.createdAt | date : 'fullDate'}}</time></h4>
+            <h4 class="blog-author read-author"><a [routerLink]="['/blog/user', this.authorUID]">{{this.authorName }}</a>  |  <time>{{(article | async)?.createdAt | date : 'fullDate'}}</time></h4>
             <button class="btn btn-dark waves-light mb-4" (click)="toggleNightMode()" *ngIf="!this.showSpinner" [ngClass]="nightMode? 'button-night' : 'button-default'" mdbRippleRadius><i class="fa fa-lightbulb-o"></i></button> 
             <div class="edit-menu align bottom" *ngIf="((this.authorid) == (article | async)?.authorUID)">        
-              <button class="btn btn-primary waves-light" [routerLink]="['/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
+              <button class="btn btn-primary waves-light" [routerLink]="['/admin/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
               <button class="btn btn-danger waves-light" (click)="deleteArticle()" mdbRippleRadius><i class="fa fa-times mr-1"></i> Delete</button>
             </div>
             <div class="share-buttons self-center mb-2">

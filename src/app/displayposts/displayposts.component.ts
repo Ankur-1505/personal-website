@@ -1,4 +1,3 @@
-import { ScrollingDirective } from './../scrolling.directive';
 import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 import { BlogpostsService } from './../blogposts.service';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -10,13 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 import { empty } from "rxjs/observable/empty";
 import { Location } from '@angular/common';
 
-@Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
-})
-export class BlogComponent implements OnInit {
 
+@Component({
+  selector: 'app-displayposts',
+  templateUrl: './displayposts.component.html',
+  styleUrls: ['./displayposts.component.scss']
+})
+export class DisplaypostsComponent implements OnInit {
   postsCollection : AngularFirestoreCollection<any>;
   id: any;
   articles : any;
@@ -69,3 +68,4 @@ export class BlogComponent implements OnInit {
   }
 
 }
+

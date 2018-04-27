@@ -48,7 +48,7 @@
                 </div>
                 <hr class="mt-0 mx-2">
                 <h5 class="card-text blog-description mx-4 home-blog-description">{{article.description}}</h5>
-                <a class="d-flex flex-row-reverse" [routerLink]="['/read-article', article.id]"> 
+                <a class="d-flex flex-row-reverse" [routerLink]="['/blog/read-article', article.id]"> 
                     <h5 class="waves-effect px-3 py-3 blog-read-more" mdbRippleRadius [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">Read more <i class="fa fa-chevron-right"></i></h5>
                 </a>
             </div></div>

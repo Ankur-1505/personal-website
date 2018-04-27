@@ -31,12 +31,12 @@
                             <div class="highlight"></div>
                             <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu" >
                                 <div *ngFor="let cats of cat"> 
-                                <a class="dropdown-item waves-light" href="/blog/{{cats}}">{{cats}}</a>
+                                <a class="dropdown-item waves-light" href="/blog/posts/{{cats}}">{{cats}}</a>
                             </div>
                             </div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
-                            <a class="nav-link" [routerLink]="['/login']">Login</a>
+                            <a class="nav-link" [routerLink]="['/auth/login']">Login</a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
@@ -44,7 +44,7 @@
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
-                            <a class="nav-link" [routerLink]="['/write-article']">Write an Article</a>
+                            <a class="nav-link" [routerLink]="['/admin/write-article']">Write an Article</a>
                             <div class="highlight"></div>
                         </li>
                         <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
@@ -60,7 +60,7 @@
                     </ul>
                     <ul class="navbar-nav nav-flex-icons">
                             <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
-                                    <a class="nav-link" [routerLink]="['/user-account']">
+                                    <a class="nav-link" [routerLink]="['/admin/user-account']">
                                         <i class="fa fa-gear"></i>
                                     </a>
                                     <div class="highlight"></div>

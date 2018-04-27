@@ -11,14 +11,14 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "preserveWhitespaces": false,
-  },
     "lib": [
       "es2017",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "preserveWhitespaces": false,
   },
   "include": ["node_modules/angular-bootstrap-md/**/*.ts",  "src/**/*.ts"] // add this line
 }

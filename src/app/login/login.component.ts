@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
 import * as firebase from 'firebase';
-
+import { WOW } from 'wowjs/dist/wow.min';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private auth : AngularFireAuth, private location: Location, public authService : AuthServiceService) { }
 
   ngOnInit() {
+    new WOW().init();
     this.loginForm = new FormGroup({
       email : new FormControl(),
       password : new FormControl()

@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "website"
+    "name": "website",
+    "ejected": false
   },
   "apps": [
     {
@@ -25,14 +26,12 @@
         "../node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
         "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
         "styles.scss",
-        "../node_modules/froala-editor/css/froala_editor.pkgd.min.css",
-        "../node_modules/froala-editor/css/froala_style.min.css",
         "../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [
         "../node_modules/hammerjs/hammer.min.js",
         "../node_modules/jquery/dist/jquery.min.js",
-        "../node_modules/froala-editor/js/froala_editor.pkgd.min.js"
+        "../node_modules/wowjs/dist/wow.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -67,6 +66,7 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+    }
   }
 }

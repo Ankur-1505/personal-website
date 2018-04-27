@@ -1,3 +1,4 @@
+import { WOW } from 'wowjs/dist/wow.min';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -37,6 +38,7 @@ export class ReadArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+    new WOW().init();
     this.route.params.subscribe(params => {
       this.id = params['id'];
       //console.log(this.id);

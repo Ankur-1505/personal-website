@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { empty } from "rxjs/observable/empty";
 import { Location } from '@angular/common';
-
+import { WOW } from 'wowjs/dist/wow.min';
 
 @Component({
   selector: 'app-displayposts',
@@ -52,7 +52,7 @@ export class DisplaypostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    new WOW().init();
   }
   onScroll(){
     this.post.more();

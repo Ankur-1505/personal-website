@@ -35,11 +35,14 @@
   
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Bitter:700" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Oswald|Slabo+27px|Ubuntu+Condensed" rel="stylesheet">
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+<script>
+ WebFont.load({
+    google: {
+      families: ['Rubik:700', 'Bitter:700', 'Oswald', 'Slabo 27px', 'Ubuntu Condensed']
+    }
+  });
+</script>
 
 
 
@@ -48,7 +51,6 @@
   <noscript>Enable JavaScript to view this web page.</noscript>
   <app-root></app-root>
   <script>
-    new WOW().init();
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
@@ -59,5 +61,6 @@
       });
     }
   </script>
+  <script>new WOW().init();</script>
 </body>
 </html>

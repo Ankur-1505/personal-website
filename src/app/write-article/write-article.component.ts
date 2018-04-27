@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 import { AuthServiceService } from '../auth-service.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { ActivatedRoute } from '@angular/router';
+import { WOW } from 'wowjs/dist/wow.min';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 interface post {
@@ -69,6 +70,7 @@ export class WriteArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+    new WOW().init();
     this.articleForm = new FormGroup({
       title : new FormControl(),
       description : new FormControl(),

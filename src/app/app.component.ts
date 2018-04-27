@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { WOW } from 'wowjs/dist/wow.min';
 import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 @Component({
@@ -31,7 +32,7 @@ export class AppComponent {
   constructor(private router: Router, private auth : AngularFireAuth,  public authService : AuthServiceService, private afs : AngularFirestore, private http : HttpClient) 
   { 
     this.messaging.usePublicVapidKey("BDey1pUU_jCAL8HR-062WocoKVO7J0V21lA28dUlISub4I5zEH-uOiOif3_4_AFCTGgTrFNEyk6_hvtgBMNQ3v0");
-
+    new WOW().init();
     if(authService.user){
       this.user = this.auth.authState.subscribe(auth => {
         this.user = auth;

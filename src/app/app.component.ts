@@ -18,6 +18,7 @@ export class AppComponent {
   user : any;
   image : string;
   userUID : any;
+  
 
   messaging = firebase.messaging();
 

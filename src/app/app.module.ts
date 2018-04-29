@@ -6,6 +6,7 @@ import { environment } from './../environments/environment';
 
 //Bootstrap
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //AngularFire2
 import { AngularFireModule } from 'angularfire2';
@@ -49,6 +50,7 @@ var config = {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,

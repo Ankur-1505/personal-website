@@ -1,3 +1,4 @@
+import { SeoService } from './seo.service';
 import { BlogpostsService } from './blogposts.service';
 import { AuthServiceService } from './auth-service.service';
 import { environment } from './../environments/environment';
@@ -56,7 +57,7 @@ var config = {
     AngularFireStorageModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [ AuthServiceService, BlogpostsService],
+  providers: [ AuthServiceService, BlogpostsService, SeoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

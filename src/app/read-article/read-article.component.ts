@@ -1,3 +1,4 @@
+import { SeoService } from './../seo.service';
 import { WOW } from 'wowjs/dist/wow.min';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +10,6 @@ import { Subscription } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthServiceService } from '../auth-service.service';
 import { Router } from '@angular/router';
-import { Meta , Title} from '@angular/platform-browser';
 import { AngularFirestore, AngularFirestoreCollection,AngularFirestoreDocument } from 'angularfire2/firestore';
 
 
@@ -27,13 +27,14 @@ export class ReadArticleComponent implements OnInit {
   user : any;
   articleid : any;
   date;
+  articleimage : string;
   authorName : any;
   authorUID;
   articledescription : string;
   articletitle : string; 
   nightMode : boolean = false;
   showSpinner : boolean =  true;
-  constructor(private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location, public meta : Meta, public share: ShareButtons) { 
+  constructor(private afs : AngularFirestore , private route: ActivatedRoute, public authService : AuthServiceService, public store : AngularFireStorage, private auth : AngularFireAuth, private location: Location, public seo : SeoService, public share: ShareButtons) { 
     
   }
 
@@ -63,16 +64,16 @@ export class ReadArticleComponent implements OnInit {
     this.articledescription = ref.description;
     this.articletitle = ref.title;
     this.category = ref.category;
+    this.articleimage = ref.articleImage;
     this.date = ref.createdAt;
     console.log(this.articleid);
+    this.seo.generateTags({
+      title : ref.title,
+      description : ref.description,
+      image : ref.articleImage
+    });
   },
-  err => console.log(err),
-  () => {
-    this.meta.updateTag({ name: 'og:title', content: this.articletitle });
-    this.meta.updateTag({ name: 'og:description', content: this.articledescription });
-    this.meta.updateTag({ name: 'twitter:title', content: this.articletitle });
-    this.meta.updateTag({ name: 'twitter:description', content: this.articledescription });
-  }
+  err => console.log(err)
 );
 }
 

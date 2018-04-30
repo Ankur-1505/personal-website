@@ -3,6 +3,8 @@ import { BlogpostsService } from './blogposts.service';
 import { AuthServiceService } from './auth-service.service';
 import { environment } from './../environments/environment';
 
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+
 
 //Bootstrap
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -18,7 +20,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
 import { NgModule , NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -56,7 +58,8 @@ var config = {
     AngularFirestoreModule,
     AngularFireAuthModule,
     HttpClientModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    LazyLoadImageModule    
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService, BlogpostsService, SeoService],

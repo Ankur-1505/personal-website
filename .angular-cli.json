@@ -26,6 +26,7 @@
         "../node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
         "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
         "styles.scss",
+        "theme.scss",
         "../node_modules/font-awesome/css/font-awesome.css"
       ],
       "scripts": [

@@ -26,16 +26,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
-
+//Material Design Module 
+import { MaterialModule } from './material.module';
 
 var config = {
-  apiKey: "AIzaSyCG-WPcL2b3jPE7CJU8ihCyvkBm8iraC-4",
-  authDomain: "websiteproject-sanketnaik99.firebaseapp.com",
-  databaseURL: "https://websiteproject-sanketnaik99.firebaseio.com",
-  projectId: "websiteproject-sanketnaik99",
-  storageBucket: "websiteproject-sanketnaik99.appspot.com",
-  messagingSenderId: "624648720335",
-  gcm_sender_id : "103953800507"
+  apiKey: "AIzaSyDCztfnvayy-O1jL0Ykl6OLg-tMjxCIOt8",
+    authDomain: "website-8590d.firebaseapp.com",
+    databaseURL: "https://website-8590d.firebaseio.com",
+    projectId: "website-8590d",
+    storageBucket: "website-8590d.appspot.com",
+    messagingSenderId: "299873560388"
 };
 
 
@@ -54,7 +54,8 @@ var config = {
     AngularFirestoreModule,
     AngularFireAuthModule,
     HttpClientModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    MaterialModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ AuthServiceService, BlogpostsService, SeoService],

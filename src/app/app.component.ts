@@ -42,7 +42,7 @@ export class AppComponent {
         console.log('user')
         } else {
           console.log('no user')
-          authService.anonymous();
+          //authService.anonymous();
           console.log(authService.user);
          // this.enableNotifications(); 
         }

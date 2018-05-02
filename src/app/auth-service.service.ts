@@ -30,7 +30,7 @@ export class AuthServiceService {
   }
   anonymous(){
     console.log('anonymous')
-    this.afAuth.auth.signInAnonymouslyAndRetrieveData()
+    this.afAuth.auth.signInAnonymously()
     .catch(err => {
       console.log('Something went wrong:',err.message);
     });

@@ -9,6 +9,7 @@ module.exports = {
         new SWPrecacheWebpackPlugin({
           cacheId: 'website',
           filename: 'service-worker.js',
+          minify : true,
           staticFileGlobs: [
             'dist/index.html',
             'dist/**.js',

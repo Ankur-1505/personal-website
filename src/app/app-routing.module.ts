@@ -34,7 +34,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
+<<<<<<< HEAD
   imports: [RouterModule.forRoot(routes, {preloadingStrategy : PreloadAllModules})],
+=======
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+>>>>>>> bd9f8cb4c23ae2c2b8497b756dfe9815a74b6118
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -2,9 +2,8 @@
 <html lang="en">
     <head></head>
     <body>
-        
-        <header>
-            <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar ie-nav" [containerInside]="false">
+
+          <!--  <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar ie-nav" [containerInside]="false">
                 <logo>
                     <a class="logo navbar-brand" href="#">
                         <strong>Website</strong>
@@ -21,10 +20,6 @@
                             <a class="nav-link" [routerLink]="['/about']">About</a>
                             <div class="highlight"></div>
                         </li>
-                        <!--<li class="nav-item waves-light" mdbRippleRadius>
-                            <a class="nav-link" href="blog">Blog</a>
-                            <div class="highlight"></div>
-                        </li> -->
                         <li class="nav-item dropdown" dropdown>
                             <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
                             Blog<span class="caret"></span></a>
@@ -79,10 +74,116 @@
                         </li>
                     </ul>
                 </links>
-            </mdb-navbar>
+            </mdb-navbar> -->
             <!-- Main -->
-        </header>
-        <router-outlet></router-outlet>
+
+            <!--Primary Toolbar-->
+            <div style="height: 100%;">
+            <div class="toolbarcontainer nav-theme">
+            <mat-toolbar color="primary" class="toolbar">
+                    <span class="logo">Website</span>
+
+                    <!--BUTTONS-->
+                    <!--Home-->
+                    <div fxShow="true" fxHide.lt-md="true">
+                    <button mat-button class="toolbar-button" [routerLink]="['/home']">Home
+                    <div class="highlight"></div>
+                    </button>
+                    <!--About-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/about']">About
+                        <div class="highlight"></div>
+                    </button>
+                    <!--Blog-->
+                    <button mat-button [matMenuTriggerFor]="menu" class="toolbar-button">Blog <div class="highlight"></div></button>
+                    <mat-menu #menu="matMenu">
+                    <div *ngFor="let cats of cat">
+                    <a href="/blog/posts/{{cats}}"><button mat-menu-item >{{cats}}
+                    </button></a>
+                    </div>
+                    </mat-menu>
+                    <!--Write An Article-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/admin/write-article']" *ngIf="(authService.admin)">Write an Article
+                        <div class="highlight"></div>
+                    </button>                    
+                    <!--Login-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/auth/login']" *ngIf="!(authService.admin)">Login
+                        <div class="highlight"></div>
+                    </button>
+                    <!--User Name-->
+                    <button mat-button class="toolbar-button" *ngIf="(authService.admin)">
+                        {{name}}
+                        <div class="highlight"></div>    
+                        </button>
+                    <!--Logout-->
+                    <button mat-button class="toolbar-button" (click)="logout()" *ngIf="(authService.admin)">Logout
+                        <div class="highlight"></div>
+                    </button>
+                </div>
+                
+                    <!--Media Icons-->
+                    <span class="toolbar-spacer"></span>
+                    <div fxShow="true" fxHide.gt-sm="true">
+                    <button mat-button (click)="sidenav.toggle()" class="toolbar-icon"><mat-icon>menu</mat-icon></button>
+                    </div>
+                    <div fxShow="false" fxHide.gt-sm="false">
+                    <mat-icon class="toolbar-icon" *ngIf="(authService.admin)" [routerLink]="['/admin/user-account']">settings</mat-icon>
+                    <mat-icon class="toolbar-icon">camera</mat-icon>
+                    <mat-icon class="toolbar-icon">message</mat-icon>
+                    </div>
+              </mat-toolbar>
+            </div>
+              <mat-sidenav-container fxFlexFill class="sidenav-container">
+
+                    <mat-sidenav #sidenav fxLayout="column" class="main-sidenav" [fixedInViewport]="Non-Fixed">
+                
+                      <div fxLayout="column">
+                
+                        <a (click)="sidenav.toggle()" mat-button>Close</a>
+                
+                    <!--BUTTONS-->
+                    <!--Home-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/home']">Home
+                    <div class="highlight"></div>
+                    </button>
+                    <!--About-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/about']">About
+                        <div class="highlight"></div>
+                    </button>
+                    <!--Blog-->
+                    <button mat-button [matMenuTriggerFor]="menu" class="toolbar-button">Blog <div class="highlight"></div></button>
+                    <mat-menu #menu="matMenu">
+                    <div *ngFor="let cats of cat">
+                    <a href="/blog/posts/{{cats}}"><button mat-menu-item >{{cats}}
+                    </button></a>
+                    </div>
+                    </mat-menu>
+                     <!--Write An Article-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/admin/write-article']" *ngIf="(authService.admin)">Write an Article
+                        <div class="highlight"></div>
+                    </button>                    
+                    <!--Login-->
+                    <button mat-button class="toolbar-button" [routerLink]="['/auth/login']" *ngIf="!(authService.admin)">Login
+                        <div class="highlight"></div>
+                    </button>
+                    <!--User Name-->
+                    <button mat-button class="toolbar-button" *ngIf="(authService.admin)">
+                        {{name}}
+                        <div class="highlight"></div>    
+                    </button>
+                    <!--Logout-->
+                    <button mat-button class="toolbar-button" (click)="logout()" *ngIf="(authService.admin)">Logout
+                        <div class="highlight"></div>
+                    </button>
+                
+                      </div>
+                
+                    </mat-sidenav>
+                
+                    <mat-sidenav-content fxFlexFill><router-outlet></router-outlet></mat-sidenav-content>
+                
+                  </mat-sidenav-container>
+        </div>
+        
     </body>
 </html>
 

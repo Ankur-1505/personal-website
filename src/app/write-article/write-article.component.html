@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+   
+    
+
+</head>
+
+<body>
+<!--Main Navigation-->
+<header>
+
+</header>
+
+<main class="body">
+
+        <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s" *ngIf="!(this.articleUpdate)">
+                <h1 class="home-title">New Article.</h1>
+                <h2 class="home-description">Get started on your new masterpiece below</h2>
+            </div>
+            <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s" *ngIf="(this.articleUpdate)">
+                <h1 class="home-title">Edit your Article.</h1>
+                <h2 class="home-description">It's okay! Humans can sometimes make mistakes</h2>
+            </div>
+
+    <!--Article Submission-->
+<form [formGroup]="articleForm">
+
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <input type="text" id="title" class="form-control" [(ngModel)]="articleTitle" mdbActive formControlName="title">
+        <label for="title">Title</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-quote-left prefix grey-text"></i>
+        <input type="text" id="description" class="form-control" [(ngModel)]="articleDescription" mdbActive formControlName="description">
+        <label for="description">Description (Keep it short)</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-tag prefix grey-text"></i>
+        <label>Category</label>
+        <select name="select-cat" id="styledSelect1" [(ngModel)]="articleCategory" class="browser-default custom-select" formControlName="category"> 
+            <option value="" selected disabled >Select a Category</option>
+            <option *ngFor="let cats of cat" value="{{cats}}">{{cats}}</option>
+        </select>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="form-title">Generate Image URL : </h2>
+        </div>
+        <div class="col-md-3">
+            <img [src]="imgurl | async" alt="" class="img-fluid z-depth-1" *ngIf="this.imghttp">
+          </div>
+          <div class="col-md-5">
+            <button class="btn btn-primary waves-light" (click)="imginput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
+            <input type="file" #imginput style="display : none;" (change)="imageURL($event)" accept=".png,.jpg,.jpeg" />
+            <div class="progress">
+              <div class="progress-bar" [style.width]="(uploadPercent2 | async) + '%'"></div>
+            </div>
+          </div>
+    </div>
+    <div class="row upload-image" *ngIf="imgurl">
+        <div class="col-md-9">
+            <input type="text" [(ngModel)]="imgurl" [ngModelOptions]="{standalone: true}" readonly #inputTarget>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary waves-light" [ngxClipboard]="inputTarget" (cbOnSuccess)="isCopied2 = true"  [class.btn-success]= "isCopied2" mdbRippleRadius><i class="fa fa-clone mr-1"></i></button>
+        </div>
+    </div>
+    
+
+    <div class="md-form black-text">
+       <app-ngx-editor [placeholder]="'Enter text here...'" [(ngModel)]="articleContent"  [spellcheck]="true" formControlName="body" imageEndPoint="websiteproject-sanketnaik99.appspot.com/users/uWgdnPlr0CZe0IdyPzwOuNwybnz2" minHeight="400px"></app-ngx-editor>
+       </div>
+
+    <div class="row upload-image">
+            <div class="col-md-3">
+              <h2 class="form-title">Add Photo : </h2>
+            </div>
+            <div class="col-md-3">
+              <img [src]="imghttp" alt="" class="img-fluid z-depth-1" *ngIf="this.imghttp">
+            </div>
+            <div class="col-md-5">
+              <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
+              <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg,.jpeg" />
+              <div class="progress">
+                <div class="progress-bar" [style.width]="(uploadPercent | async) + '%'"></div>
+              </div>
+            </div>                
+          </div> 
+
+    <div class="text-center">
+        <button class="btn btn-black waves-light" (click)="onFormSubmit()" mdbRippleRadius *ngIf="!(this.articleUpdate)">Publish<i class="fa fa-upload ml-1"></i></button>
+        <button class="btn btn-black waves-light" (click)="updateArticle()" mdbRippleRadius *ngIf="(this.articleUpdate)">Update<i class="fa fa-upload ml-1"></i></button>
+        
+    </div>
+
+
+</form>
+<!--Article Submission-->
+
+
+
+  </main>
+</body>
+</html>

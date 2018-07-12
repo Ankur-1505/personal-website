@@ -1,0 +1,66 @@
+<html lang="en"> 
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+
+
+</head>
+
+<body>
+<!--Main Navigation-->
+<header>
+
+</header>
+
+<main class="back">
+    <div class="container blog-page" infiniteScroll infiniteScrollContainer [infiniteScrollDistance]="3" [infiniteScrollThrottle]="1000" (scrolled)="onScroll()">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title text-center text-black ">Blog.</h1>
+        </div>
+        <div class="sk-folding-cube" *ngIf="showSpinner">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+    </div>
+    <div class="container-blog" *ngFor="let article of post.data | async" >
+    <div class="jumbotron">
+        <div class="row" >
+            <div class="col-md-4 blog-header">
+                <img class="img-fluid z-depth-1 " src="{{article.articleImage}}" alt="">
+            </div>
+            <div class="col-md-8 contents">
+                <h2 class="card-title text-center blog-title home-blog-title px-3">{{article.title}}</h2>
+                <a [routerLink]="['/blog/posts', article.category]" ><h3 class="card-title text-center bold blog-category" [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">{{article.category}}</h3></a>
+                <h5 class="card-title text-center blog-author home-author">{{article.authorName}} | <time>{{article.createdAt | date : fullDate}}</time></h5>
+                <hr class="mt-0 mx-2">
+                <h5 class="card-text blog-description mx-4 home-blog-description">{{article.description}}</h5>
+                <a class="d-flex flex-row-reverse" [routerLink]="['/blog/read-article', article.id]"> 
+                    <h5 class="waves-effect px-3 py-3 blog-read-more" mdbRippleRadius [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">Read more <i class="fa fa-chevron-right"></i></h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sk-folding-cube" *ngIf="post.loading | async">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+</div>
+<div *ngIf="post.done | async">
+        <h2 class="home-description text-black text-center">You've reached the end!</h2>
+</div>
+
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+</body>

@@ -1,0 +1,66 @@
+<html lang="en">
+  <head></head>
+  <body>
+    
+    <header></header>
+
+    <main class="login-page">
+
+        <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title">Your Account.</h1>
+            <h2 class="home-description">Update your Details Below</h2>
+        </div>
+
+        <div class="jumbotron">
+          <div class="row form-row">
+            <div class="col-md-3">
+              <h2 class="form-title">Email : </h2>
+            </div>
+            <div class="col-md-9"><div class="md-form form-sm input-content">
+                <input type="text" id="form11" disabled>
+                <label for="form11" class="disabled">{{email}}</label>
+                </div></div>
+          </div>
+          <div class="row form-row">
+            <div class="col-md-3">
+              <h2 class="form-title">Name : </h2>
+            </div>
+            <div class="col-md-7">
+              <input type="text" id="form11" placeholder="{{authorName}}" [(ngModel)]="name">
+              <label for="form11" class="disabled"></label>
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-primary waves-light" mdbRippleRadius (click)="updateName(name)"><i class="fa fa-upload"></i>   Update</button>
+            </div>
+          </div>
+          <div class="row form-row">
+              <div class="col-md-3">
+                <h2 class="form-title">Description : </h2>
+              </div>
+              <div class="col-md-7">
+                  <app-ngx-editor [placeholder]="'Enter description here...'" [(ngModel)]="description"  [spellcheck]="true" minHeight="200px">{{(authorDescription | async)?.description}}</app-ngx-editor>
+                <label for="form11" class="disabled"></label>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-primary waves-light" mdbRippleRadius (click)="updateDescription(description)"><i class="fa fa-upload"></i>   Update</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <h2 class="form-title">Photo : </h2>
+              </div>
+              <div class="col-md-3">
+              <img src="{{imghttp }}" alt="" class="img-fluid rounded-circle z-depth-1" height="150px" width="150px">
+              </div>
+              <div class="col-md-5">
+                <button class="btn btn-primary waves-light" (click)="fileinput.click()" mdbRippleRadius><i class="fa fa-upload"></i>   Upload</button>
+                <input type="file" #fileinput style="display : none;" (change)="selectImage($event)" accept=".png,.jpg" />
+              </div>                
+            </div> 
+        </div>
+
+    
+    </main>
+
+  </body>
+</html>

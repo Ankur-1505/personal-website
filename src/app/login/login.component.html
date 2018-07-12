@@ -1,0 +1,49 @@
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Rubik:700" rel="stylesheet">
+   
+    
+
+</head>
+
+<body>
+
+
+    <!--Main Navigation-->
+    <header>
+
+    </header>
+
+
+      <main class="login-page">
+
+          <div class="text-center title containter-fluid wow fadeInUp" data-wow-delay="0.2s">
+              <h1 class="home-title">Login.</h1>
+              <h2 class="home-description">Fill out your details below to login</h2>
+          </div>
+
+
+          <div class="container">
+          <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">          
+              <div class="md-form">
+                  <i class="fa fa-envelope prefix grey-text"></i>
+                  <input type="text" id="defaultForm-email" class="form-control" mdbActive formControlName="email">
+                  <label for="defaultForm-email">Your email</label>
+              </div>
+          
+              <div class="md-form">
+                  <i class="fa fa-lock prefix grey-text"></i>
+                  <input type="password" id="defaultForm-pass" class="form-control" mdbActive formControlName="password">
+                  <label for="defaultForm-pass">Your password</label>
+              </div>
+          
+              <div class="text-center">
+                  <button class="btn btn-black waves-light" mdbRippleRadius>Login</button>
+              </div>
+          </form>
+        </div>
+
+      </main>
+  </body>
+</html>

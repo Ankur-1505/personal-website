@@ -1,0 +1,52 @@
+<html lang="en">
+  <head></head>
+  <body>
+    
+    <header></header>
+
+  <main class="user-page">
+    <div class="jumbotron">
+      <h1 class="h1-responsive text-center home-title">About the author.</h1>
+      <h4 class="h4-responsive text-center home-title">Here's some information about the author</h4>
+      <hr>
+      <div class="row">
+          <!--Avatar-->
+          <div class="col-12 col-sm-2">
+              <img src="{{(userRef | async)?.photoURL}}" class="img-fluid rounded-circle z-depth-1">
+          </div>
+          <div class="col-12 col-sm-10">
+              <h2 class="author-name h2-responsive blog-title">{{(userRef | async)?.displayName}}</h2>
+                  <i class="fa fa-facebook fa-2x icon"> </i>
+                  <i class="fa fa-twitter fa-2x"> </i>
+              <h4 class="h4-responsive blog-description">{{(userRef | async)?.description}}</h4>
+          </div>
+      </div>
+    </div>
+    <div class="sk-folding-cube sk-folding-cube-red" *ngIf="showSpinner">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>      
+    <div class="container">
+        <h1 class="h1-responsive text-center home-title m-5">Some of {{(userRef | async)?.displayName}}'s posts.</h1>
+    <div class="row">
+        <div class="col-md-4 mb-5" *ngFor="let article of articlesObservable | async"><div class="jumbotron p-0 user-blog-card">
+            <img class="img-fluid z-depth-1 m-0 p-0 mb-3" src="{{article.articleImage}}" alt="">
+            <div class="container mx-1">
+            <h2 class="card-title text-center blog-title">{{article.title}}</h2>
+            <h3 class="card-title text-center blog-category" [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">{{article.category}}</h3>
+            <h3 class="card-title text-center blog-author">{{article.authorName}}  | <time>{{article.createdAt | date : fullDate}}</time></h3>
+            <h5 class="card-text text-center blog-description">{{article.description}}</h5>
+            <a href="#" class="d-flex flex-row-reverse" [routerLink]="['/blog/read-article', article.id]"> 
+                <h5 class="waves-effect p-2 blog-read-more" mdbRippleRadius [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">Read more <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        </div>
+        </div></div>
+    </div>
+</div>
+    
+  </main>
+
+</body>
+</html>

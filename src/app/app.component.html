@@ -1,0 +1,87 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<html lang="en">
+    <head></head>
+    <body>
+        
+        <header>
+            <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar ie-nav" [containerInside]="false">
+                <logo>
+                    <a class="logo navbar-brand" href="#">
+                        <img src="assets/logo.png" class="logo" alt="logo">
+                    </a>
+                </logo>
+                <links>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item waves-light" mdbRippleRadius>
+                            <a class="nav-link" [routerLink]="['/home']">Home
+                            </a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius>
+                            <a class="nav-link" [routerLink]="['/about']">About</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item dropdown" dropdown>
+                            <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                            Blog<span class="caret"></span></a>
+                            <div class="highlight"></div>
+                            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu" >
+                                <div *ngFor="let cats of cat"> 
+                                <a class="dropdown-item waves-light" href="/blog/posts/{{cats}}">{{cats}}</a>
+                            </div>
+                            </div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
+                            <a class="nav-link" [routerLink]="['/auth/login']">Login</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
+                            <a class="nav-link"><img src="../assets/guest.png" alt="" height="5px" width="5px" class="img-fluid rounded-circle display-image">Guest</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
+                            <a class="nav-link" [routerLink]="['/admin/write-article']">Write an Article</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
+                            <a class="nav-link" (click)="logout()">Logout</a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
+                            <a class="nav-link"><img src="{{image}}" alt="" class="img-fluid rounded-circle z-depth-1 display-image" height="5px" width="5px">  {{name}}</a>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius *ngIf="!(authService.admin)">
+                            <a class="nav-link blank-link"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav nav-flex-icons">
+                            <li class="nav-item waves-light" mdbRippleRadius *ngIf="(authService.admin)">
+                                    <a class="nav-link" [routerLink]="['/admin/user-account']">
+                                        <i class="fa fa-gear"></i>
+                                    </a>
+                                    <div class="highlight"></div>
+                                </li>
+                        <li class="nav-item waves-light" mdbRippleRadius>
+                            <a class="nav-link" href="https://twitter.com/SanketNaik99">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <div class="highlight"></div>
+                        </li>
+                        <li class="nav-item waves-light" mdbRippleRadius>
+                            <a class="nav-link" href="https://www.instagram.com/sanketnaik99/">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                            <div class="highlight"></div>
+                        </li>
+                    </ul>
+                </links>
+            </mdb-navbar> 
+
+            <!-- Main -->
+        </header>
+        <router-outlet></router-outlet>
+    </body>
+</html>
+
+
+

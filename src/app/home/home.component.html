@@ -1,0 +1,80 @@
+<html lang="en">
+
+<head>
+
+   
+    
+
+</head>
+
+<body>
+
+
+    <!--Main Navigation-->
+    <header>       
+
+        <div class="view intro">
+            <div class="full-bg-img">
+                <div class="mask flex-baseline rgba-black-light">
+                    <div class="container text-center">
+                        <div class="white-text text-center wow animated fadeInUp">
+                            <h1 class="home-title intro-text">Welcome.</h1>
+                            <h2 class="home-description">Keep scrolling to explore</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main Layout-->
+    <main class="text-center">
+        <div class="container-fluid  blog-container py-5">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title text-black ">Blog.</h1>
+            <h2 class="home-description text-black">Check out some of the latest posts</h2>
+        </div>
+        
+        <div class="spinner" *ngIf="this.showSpinner">
+        </div>
+        <div *ngIf="!this.showSpinner">
+        </div>
+        <div class="row mt-3 mx-1">
+            <div class="col-md-4 mb-5" *ngFor="let article of articlesObservable | async">
+                <div class="jumbotron my-0 user-blog-card white z-depth-3" >
+                <div class="container pb-3 px-0">
+                <img class="img-fluid z-depth-1 mb-3" [lazyLoad]="article.articleImage" alt="">
+                <h2 class="card-title text-center blog-title home-blog-title px-3">{{article.title}}</h2>
+                <a [routerLink]="['/blog/posts/', article.category]" [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }"><h3 class="card-title text-center bold blog-category" >{{article.category}}</h3></a>
+                <h5 class="card-title text-center blog-author home-author">{{article.authorName}} | <time>{{article.createdAt | date : fullDate}}</time></h5>
+                </div>
+                <hr class="mt-0 mx-2">
+                <h5 class="card-text blog-description mx-4 home-blog-description">{{article.description}}</h5>
+                <a class="d-flex flex-row-reverse" [routerLink]="['/blog/read-article', article.id]"> 
+                    <h5 class="waves-effect px-3 py-3 blog-read-more" mdbRippleRadius [ngClass]="{techcat : (article.category) == 'Technology',codecat : (article.category) == 'Code',travelcat : (article.category) == 'Travel',lifestylecat : (article.category) == 'Lifestyle',misccat : (article.category) == 'Miscellaneous' }">Read more <i class="fa fa-chevron-right"></i></h5>
+                </a>
+            </div></div>
+        </div>
+    </div>
+
+        <div class="containter-fluid insta-container py-5 px-2">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+            <h1 class="home-title text-black">Instagram.</h1>
+            <h2 class="home-description text-black">Check out my instagram feed and follow me to get all the latest updates</h2>
+            <div class="inter-space"></div>
+            <iframe src="https://www.powr.io/plugins/social-feed/view?unique_label=8b4e62f6_1520368048&external_type=iframe" width="100%"
+                height="600" frameborder="0"></iframe>
+        </div>
+        
+    </div>
+            
+    </main>
+    <!--Main Layout-->
+    <script>
+        new WOW().init();
+    </script>
+</body>
+
+</html>

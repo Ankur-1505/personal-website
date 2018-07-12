@@ -1,0 +1,60 @@
+<html lang="en">
+
+<head>
+
+   
+
+    
+
+</head>
+
+<body>
+<!--Main Navigation-->
+<header>
+
+</header>
+<main class="text-center py-5 read-page" [ngClass]="nightMode? 'night' : 'default'">
+
+  <div class="container-fluid">
+      <div class="jumbotron px-0 py-0 mx-2 my-2" [ngClass]="showSpinner? 'z-depth-0' : 'z-depth-1'">
+          <div class="sk-folding-cube sk-folding-cube-red" *ngIf="showSpinner">
+              <div class="sk-cube1 sk-cube"></div>
+              <div class="sk-cube2 sk-cube"></div>
+              <div class="sk-cube4 sk-cube"></div>
+              <div class="sk-cube3 sk-cube"></div>
+          </div>         
+        <div class="row">
+            <div class="col-md-4">
+            <img class="img-fluid z-depth-1" src="{{(article | async)?.articleImage}}" alt="">
+          </div>
+          <div class="col-md-7 vertical-center">      
+            <h1 class="blog-title read-title">{{ (article | async)?.title }}</h1>
+            <h3 class="card-title text-center bold blog-category" [ngClass]="{techcat : (category) == 'Technology',codecat : (category) == 'Code',travelcat : (category) == 'Travel',lifestylecat : (category) == 'Lifestyle',misccat : (category) == 'Miscellaneous', night : nightMode == true }">{{category}}</h3>
+            <h4 class="blog-author read-author"><a [routerLink]="['/blog/user', this.authorUID]">{{this.authorName }}</a>  |  <time>{{(article | async)?.createdAt | date : 'fullDate'}}</time></h4>
+            <button class="btn btn-dark waves-light mb-4" (click)="toggleNightMode()" *ngIf="!this.showSpinner" [ngClass]="nightMode? 'button-night' : 'button-default'" mdbRippleRadius><i class="fa fa-lightbulb-o"></i></button> 
+            <div class="edit-menu align bottom" *ngIf="((this.authorid) == (article | async)?.authorUID)">        
+              <button class="btn btn-primary waves-light" [routerLink]="['/admin/write-article',this.articleid]" mdbRippleRadius><i class="fa fa-edit mr-1"></i> Edit</button>
+              <button class="btn btn-danger waves-light" (click)="deleteArticle()" mdbRippleRadius><i class="fa fa-times mr-1"></i> Delete</button>
+            </div>
+            <div class="share-buttons self-center mb-2">
+              <share-buttons [theme]="'default'"
+              [include]="['facebook','twitter','google','whatsapp','email','copy']"
+              [show]="2"
+              [autoSetMeta]="false"></share-buttons>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="jumbotron" class="article-body" data-wow-delay="0.5s">
+      <p class="blog-description read-body h3-responsive">{{ (article | async)?.description }}</p>
+      <div class="blog-description read-body h3-responsive" [innerHTML]="(article | async)?.body"></div>
+    </div>
+  </div>
+
+
+
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+.read-page {
+    margin-top: 30px;
+}
+.space {
+    margin-bottom: 12rem;
+}
+.top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.button-night {
+    background : #ffbb33;
+}
+.button-default {
+    background: black;
+}
+.default {
+    background: white;
+    color: black;
+}
+.read-title{
+    margin-top: 20px;
+    color: #424242;
+}
+.read-author {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #757575;
+}
+.read-body {
+    color: #616161;
+}
+
+
+
+
+
+.night {
+    background: black;
+    color: white;
+}
+.night .jumbotron{
+    background: black;
+}
+.night .read-title {
+    color : white
+}
+.night .read-author{
+    color: white
+}
+.night .read-body{
+    color:  white;
+}

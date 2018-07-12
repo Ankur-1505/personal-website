@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Website</title>
+  <base href="/">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Rubik:700', 'Bitter:700']
+    }
+  });
+</script>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0575e6">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-navbutton-color" content="#0575e6">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#0575e6">
+  <!-- COMMON TAGS -->
+  <meta charset="utf-8">
+  <title>Read</title>
+  <!-- Search Engine -->
+  <meta name="description" content="** TESTING **">
+  <meta name="image" content="http://www.iconarchive.com/show/small-n-flat-icons-by-paomedia/star-icon.html">
+  <!-- Schema.org for Google -->
+  <meta itemprop="name" content="website">
+  <meta itemprop="description" content="** TESTING **">
+  <meta itemprop="image" content="http://www.iconarchive.com/show/small-n-flat-icons-by-paomedia/star-icon.html">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="website">
+  <meta name="twitter:description" content="** TESTING **">
+  <meta name="twitter:image:src" content="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/star-icon.png">
+  <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+  <meta name="og:title" content="website">
+  <meta name="og:description" content="** TESTING **">
+  <meta name="og:type" content="website">
+  <meta name="og:image" content="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/star-icon.png">
+  
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+
+
+
+</head>
+<body>
+  <noscript>Enable JavaScript to view this web page.</noscript>
+  <app-root></app-root>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+      .then((registration) => {
+        console.log('SW registered');
+      })
+      .catch((err) => {
+        console.log('SW error', err);
+      });
+    }
+  </script>
+  <script>new WOW().init();</script>
+</body>
+</html>
